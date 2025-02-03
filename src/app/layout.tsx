@@ -6,9 +6,9 @@ import { alpha } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import AppNavbar from "@/components/AppNavbar";
-import Header from "@/components/Header";
-import SideMenu from "@/components/SideMenu";
+import AppNavbar from "@/common/components/layout/AppNavbar";
+import Header from "@/common/components/layout/Header";
+import SideMenu from "@/common/components/layout/SideMenu";
 import AppTheme from "@/theme/AppTheme";
 import "./globals.css";
 
@@ -30,8 +30,8 @@ const checkAuth = async (): Promise<boolean> => {
   // Aquí puedes usar lógica real para verificar si el usuario está autenticado,
   // como validar cookies, tokens, o llamar a una API.
   const isAuthenticated = document.cookie.includes("authToken=true");
-  return isAuthenticated;
-  // return true;
+  // return isAuthenticated;
+  return false;
 };
 
 export default function Dashboard(props: {
@@ -56,13 +56,18 @@ export default function Dashboard(props: {
     validateAuth();
   }, [router]);
 
+  {
+    JSON.stringify(isAuthenticated);
+  }
   // Mientras se verifica la autenticación, muestra un loader o un placeholder vacío
-  if (isAuthenticated === null) {
+  if (
+    isAuthenticated === null ||
+    isAuthenticated === false ||
+    isAuthenticated === undefined
+  ) {
     return (
       <html lang="en">
-        <body>
-          <p>Cargando...</p>
-        </body>
+        <body>{props.children}</body>
       </html>
     );
   }

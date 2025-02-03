@@ -10,7 +10,7 @@ import { tabsClasses } from '@mui/material/Tabs';
 import Typography from '@mui/material/Typography';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import DashboardRoundedIcon from '@mui/icons-material/DashboardRounded';
-import SideMenuMobile from './SideMenuMobile';
+import SideMenuMobile from '@/common/components/layout/SideMenuMobile';
 import MenuButton from './MenuButton';
 import ColorModeIconDropdown from '@/theme/ColorModeIconDropdown';
 

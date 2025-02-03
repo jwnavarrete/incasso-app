@@ -8,10 +8,10 @@ import { alpha } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
-import AppNavbar from '@/components/AppNavbar';
-import Header from '@/components/Header';
-import MainGrid from '@/components/MainGrid';
-import SideMenu from '@/components/SideMenu';
+import AppNavbar from '@/common/components/layout/AppNavbar';
+import Header from '@/common/components/layout/Header';
+import MainGrid from '@/common/components/layout/MainGrid';
+import SideMenu from '@/common/components/layout/SideMenu';
 import AppTheme from '@/theme/AppTheme';
 
 export default function Dashboard(props: { disableCustomTheme?: boolean }) {

@@ -14,7 +14,7 @@ import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import ColorModeIconDropdown from '@/theme/ColorModeIconDropdown';
-import Sitemark from './SitemarkIcon';
+import Sitemark from '@/common/components/landing/SitemarkIcon';
 import Link from 'next/link';
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
@@ -93,12 +93,16 @@ export default function AppAppBar() {
               alignItems: 'center',
             }}
           >
-            <Button color="primary" variant="text" size="small">
-              Sign in
-            </Button>
-            <Button color="primary" variant="contained" size="small">
-              Sign up
-            </Button>
+            <Link href="/signin" passHref>
+              <Button color="primary" variant="text" size="small">
+                Sign in
+              </Button>
+            </Link>
+            <Link href="http://auth.localhost:3000/users/sign_up_new" passHref>
+              <Button color="primary" variant="contained" size="small">
+                Sign up
+              </Button>
+            </Link>
             <ColorModeIconDropdown />
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' }, gap: 1 }}>

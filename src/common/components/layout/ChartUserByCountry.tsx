@@ -17,7 +17,7 @@ import {
   UsaFlag,
   BrazilFlag,
   GlobeFlag,
-} from '../app/[subdomain]/dashboard/internals/components/CustomIcons';
+} from '../../app/[subdomain]/dashboard/internals/components/CustomIcons';
 
 const data = [
   { label: 'India', value: 50000 },

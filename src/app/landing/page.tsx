@@ -4,15 +4,15 @@ import * as React from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import AppTheme from '@/theme/AppTheme';
-import AppAppBar from './components/AppAppBar';
-import Hero from './components/Hero';
-import LogoCollection from './components/LogoCollection';
-import Highlights from './components/Highlights';
-import Pricing from './components/Pricing';
-import Features from './components/Features';
-import Testimonials from './components/Testimonials';
-import FAQ from './components/FAQ';
-import Footer from './components/Footer';
+import AppAppBar from '@/common/components/landing/AppAppBar';
+import Hero from '@/common/components/landing/Hero';
+import LogoCollection from '@/common/components/landing/LogoCollection';
+import Highlights from '@/common/components/landing/Highlights';
+import Pricing from '@/common/components/landing/Pricing';
+import Features from '@/common/components/landing/Features';
+import Testimonials from '@/common/components/landing/Testimonials';
+import FAQ from '@/common/components/landing/FAQ';
+import Footer from '@/common/components/landing/Footer';
 
 export default function MarketingPage(props: { disableCustomTheme?: boolean }) {
   return (
