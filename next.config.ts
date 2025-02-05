@@ -1,7 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    domains: ["app.localhost", "localhost", "auth.localhost"],
+  },
+
+  // otras opciones de configuración
 };
 
 export default nextConfig;

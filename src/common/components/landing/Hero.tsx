@@ -11,6 +11,7 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import visuallyHidden from '@mui/utils/visuallyHidden';
 import { styled } from '@mui/material/styles';
+import Image from 'next/image';
 
 const StyledBox = styled('div')(({ theme }) => ({
   alignSelf: 'center',
@@ -91,6 +92,7 @@ export default function Hero() {
               products
             </Typography>
           </Typography>
+          
           <Typography
             sx={{
               textAlign: 'center',

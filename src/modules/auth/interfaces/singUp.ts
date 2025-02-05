@@ -23,6 +23,11 @@ export interface ITenantSignUp {
     company: ICompany
 }
 
+export interface ITenantSignUp {    
+    user: IUser;
+    company: ICompany;
+}
+
 export const initialTenantSignUp: ITenantSignUp = {
     user: {
         fullname: "",

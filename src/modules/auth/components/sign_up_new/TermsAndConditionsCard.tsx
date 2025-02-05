@@ -1,0 +1,161 @@
+"use client";
+import React, { useState } from "react";
+import {
+  Card,
+  CardContent,
+  Typography,
+  IconButton,
+  Checkbox,
+  Button,
+  Link,
+  Box,
+} from "@mui/material";
+import { useAuthContext } from "@/modules/auth/context/authContext";
+import DescriptionIcon from "@mui/icons-material/Description";
+import { useRouter } from "next/navigation";
+
+const TermsAndConditionsCard = () => {
+  const [accepted, setAccepted] = useState(false);
+  const [showMore, setShowMore] = useState(false);
+  const { handleBack, handleSaveClient } =
+    useAuthContext();
+  // const router = useRouter();
+
+  const handleCheck = () => {
+    setAccepted(!accepted);
+  };
+
+  const handleReadMore = () => {
+    setShowMore(!showMore);
+  };
+
+  const handleCreateAccount = async () => {
+    // Enviar la información del cliente al backend
+    const response = await handleSaveClient();
+    console.log("Response:", response);
+  };
+
+  return (
+    <Box
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      height="100vh"
+    >
+      <Card sx={{ maxWidth: "70%", width: "100%" }}>
+        <CardContent>
+          {/* Icono y Título */}
+          <Box
+            display="flex"
+            justifyContent="center"
+            flexDirection="column"
+            alignItems="center"
+          >
+            <IconButton sx={{ fontSize: 40 }}>
+              <DescriptionIcon />
+            </IconButton>
+            <Typography variant="h5" sx={{ fontWeight: "bold", marginTop: 1 }}>
+              Terms and Conditions of Use
+            </Typography>
+          </Box>
+
+          {/* Texto de los términos */}
+          <Box sx={{ maxHeight: "50vh", overflowY: "auto", marginTop: 2 }}>
+            <Typography variant="body1">
+              Welcome to [Dazzsoft] (hereinafter referred to as "the Platform").
+              By accessing or using our Platform, you agree to comply with these
+              Terms and Conditions. If you do not agree with any part of these
+              terms, please refrain from using the Platform. 1. Acceptance of
+              Terms By using the Platform, you confirm that you are at least 18
+              years old or meet the legal age required in your country to access
+              these services. 2. Use of the Platforq You agree to use the
+              Platform responsibly and only for lawful purposes^ Any attempt to
+              disrupt the Platform’s functionality or engage in fraudulent
+              activity is strictly prohibited. 3. Account Creatiop Certain
+              features may require you to create an account. You are responsible
+              for the confidentiality of your login information^ All information
+              provided during registration must be accurate, complete, and
+              up-to-date. 4. Intellectual PropertO All content on the Platform,
+              including but not limited to text, images, logos, and design, is
+              the property of [Your Company Name]^ Unauthorized use,
+              reproduction, or distribution of our content is strictly
+              prohibited.
+              {showMore && (
+                <span>
+                  require you to create an account. You are responsible for the
+                  confidentiality of your login information^ All information
+                  provided during registration must be accurate, complete, and
+                  up-to-date. 4. Intellectual PropertO All content on the
+                  Platform, including but not limited to text, images, logos,
+                  and design, is the property of [Your Company Name]^
+                  Unauthorized use, reproduction, or distribution of our content
+                  is strictly prohibited. 5. Limitation of LiabilitO [Your
+                  Company Name] is not responsible for any damages, losses, or
+                  disruptions caused by the use of the Platform^ Use of the
+                  Platform is at your own risk. 6. Changes to Termj We may
+                  update these Terms and Conditions at any time. Any changes
+                  will be posted on this page, and your continued use of the
+                  Platform constitutes acceptance of the updated terms. 7.
+                  Privacy Policy Your use of the Platform is also governed by
+                  our Privacy Policy, which explains how we collect, use, and
+                  protect your personal data. require you to create an account.
+                  You are responsible for the confidentiality of your login
+                  information^ All information provided during registration must
+                  be accurate, complete, and up-to-date. 4. Intellectual
+                  PropertO All content on the Platform, including but not
+                  limited to text, images, logos, and design, is the property of
+                  [Your Company Name]^ Unauthorized use, reproduction, or
+                  distribution of our content is strictly prohibited. 5.
+                  Limitation of LiabilitO [Your Company Name] is not responsible
+                  for any damages, losses, or disruptions caused by the use of
+                  the Platform^ Use of the Platform is at your own risk. 6.
+                  Changes to Termj We may update these Terms and Conditions at
+                  any time. Any changes will be posted on this page, and your
+                  continued use of the Platform constitutes acceptance of the
+                  updated terms. 7. Privacy Policy Your use of the Platform is
+                  also governed by our Privacy Policy, which explains how we
+                  collect, use, and protect your personal data
+                </span>
+              )}
+            </Typography>
+          </Box>
+          <Box display="flex" justifyContent="center">
+            <Link
+              component="button"
+              variant="body2"
+              sx={{ display: "block", marginTop: 1 }}
+              onClick={handleReadMore}
+            >
+              {showMore ? "Leer menos" : "Leer más"}
+            </Link>
+          </Box>
+
+          {/* Check para aceptar los términos */}
+          <Box display="flex" alignItems="center" marginTop={2}>
+            <Checkbox checked={accepted} onChange={handleCheck} />
+            <Typography variant="body2">
+              Acepto los términos y condiciones
+            </Typography>
+          </Box>
+
+          {/* Botón Crear cuenta */}
+          <Box display="flex" justifyContent="space-between" marginTop={3}>
+            <Button variant="outlined" color="primary" onClick={handleBack}>
+              Regresar
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleCreateAccount}
+              disabled={!accepted} // Deshabilitar el botón hasta que el usuario acepte los términos
+            >
+              Crear cuenta
+            </Button>
+          </Box>
+        </CardContent>
+      </Card>
+    </Box>
+  );
+};
+
+export default TermsAndConditionsCard;

@@ -5,6 +5,7 @@ import {
   ITenantSignUp,
   IUser,
 } from "@/modules/auth/interfaces/singUp";
+import AuthService from "../services/auth.services";
 
 interface AuthContextProps {
   login: (data: IUser) => void;
@@ -15,6 +16,7 @@ interface AuthContextProps {
   handleBack: () => void;
   updateUserSignUpData: (userData: Partial<IUser>) => void;
   updateCompanySignUpData: (companyData: Partial<ICompany>) => void;
+  handleSaveClient: () => Promise<string>;
 }
 
 interface AuthProviderProps {
@@ -28,6 +30,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [signUpData, setSignUpData] =
     useState<ITenantSignUp>(initialTenantSignUp);
 
+  const updateTermsAndConditions = (acceptTermsAndConditions: boolean) => {
+    setSignUpData((prevData) => ({
+      ...prevData,
+      acceptTermsAndConditions,
+    }));
+  };
   const updateUserSignUpData = (userData: Partial<IUser>) => {
     setSignUpData((prevData) => ({
       ...prevData,
@@ -66,6 +74,22 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setStep((prevStep) => prevStep - 1);
   };
 
+  const handleSaveClient = async () => {
+    // const authService = new AuthService();
+
+    console.log("Creating client:", signUpData);
+    // authService
+    //   .createClient(signUpData)
+    //   .then((response) => {
+    //     console.log("Client created successfully:", response);
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error creating client:", error);
+    //   });
+
+    return "Finish";
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -77,6 +101,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         handleBack,
         updateUserSignUpData,
         updateCompanySignUpData,
+        handleSaveClient,
       }}
     >
       {children}

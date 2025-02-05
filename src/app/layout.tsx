@@ -10,7 +10,7 @@ import AppNavbar from "@/common/components/layout/AppNavbar";
 import Header from "@/common/components/layout/Header";
 import SideMenu from "@/common/components/layout/SideMenu";
 import AppTheme from "@/theme/AppTheme";
-import "./globals.css";
+// import "./globals.css";
 
 // Fuentes
 import { Geist, Geist_Mono } from "next/font/google";

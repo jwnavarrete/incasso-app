@@ -3,7 +3,7 @@ import subdomains from "./subdomains.json";
 
 export const config = {
   matcher: [
-    "/((?!api/|_next/|_static/|_vercel|[\\w-]+\\.\\w+).*)",
+    "/((?!api/|_next/|static/|_vercel|[\\w-]+\\.\\w+).*)", // Excluye /static/
   ],
 };
 
@@ -11,9 +11,18 @@ export default async function middleware(req: Request) {
   const url = new URL(req.url);
   const hostname = req.headers.get("host") || "";
 
+  // Permitir acceso directo a archivos estáticos
+  if (url.pathname.startsWith("/static/")) {
+    return NextResponse.next();
+  }
+
   // Define list of allowed domains
-  // (including localhost and your deployed domain)
-  const allowedDomains = ["localhost:3000", "trillionclues.com.com", "yourdomain.com", "auth.localhost:3000"];
+  const allowedDomains = [
+    "localhost:3000",
+    "auth.localhost",
+    "auth.localhost:3000",
+    "yourdomain.com",
+  ];
 
   // Check if the current hostname is in the list of allowed domains
   const isAllowedDomain = allowedDomains.some(domain => hostname.includes(domain));
@@ -22,7 +31,7 @@ export default async function middleware(req: Request) {
   const subdomain = hostname.split(".")[0];
 
   // If the subdomain is not found in the subdomains.json file and it's not an allowed domain, redirect to a 404 page
-  if (!subdomains.some(d => d.subdomain === subdomain) && !allowedDomains.includes(subdomain)) {
+  if (!subdomains.some(d => d.subdomain === subdomain) && !allowedDomains.includes(hostname)) {
     console.log('subdomain not found:', subdomain);
     return NextResponse.redirect(new URL(`http://auth.localhost:3000/slug_not_found`));
   }

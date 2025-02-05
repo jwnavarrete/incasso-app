@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import Link from "@mui/material/Link";
-import Typography from "@mui/material/Typography";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signUpSchema } from "@/modules/auth/validations/signUpSchema";
 import { useForm, FormProvider } from "react-hook-form";
@@ -13,9 +11,12 @@ import ActionButtons from "./ActionButons";
 import SelectHookForm from "@/common/components/ui/SelectHookForm";
 import { typeOfIdentificationList } from "@/common/utils/catalogo/TypeOfIdentificationList";
 import { countryOptions } from "@/common/utils/catalogo/CountryList";
+import HeaderInfoCard from "./HeaderInfoCard";
+import OnboardingLayout from "@/common/components/layout/OnboardingLayout";
 
 export default function AccountInfoCard() {
   const { signUpData } = useAuthContext();
+  const urlImage = "/static/images/auth/sign_up.jpg";
 
   const methods = useForm({
     resolver: yupResolver(signUpSchema),
@@ -30,71 +31,74 @@ export default function AccountInfoCard() {
   }, [signUpData.user]);
 
   return (
-    <FormProvider {...methods}>
-      <Card
-        variant="outlined"
-        sx={{ p: 4, width: "450px", flexDirection: "column" }}
-      >
-        <Typography
-          component="h1"
-          variant="h4"
-          sx={{ width: "100%", fontSize: "clamp(2rem, 10vw, 2.15rem)" }}
-        >
-          Create your account
-        </Typography>
-        <Box
-          component="form"
-          noValidate
+    <OnboardingLayout backgroundImageUrl={urlImage}>
+      <FormProvider {...methods}>
+        <Card
+          variant="outlined"
           sx={{
+            p: 4,
+            width: "450px",
+            height: "auto", // Altura definida
             display: "flex",
             flexDirection: "column",
-            width: "100%",
-            gap: 2,
+            alignItems: "center",
+            overflow: "auto", // Activar scroll si el contenido crece
           }}
         >
-          <Grid container spacing={2} mt={1}>
-            <Grid item xs={12}>
-              <InputHookForm name="fullname" required label="Full Name" />
+          <HeaderInfoCard
+            title="User Information"
+            subtitle="Enter details to continue"
+            logoSrc="/static/LogoCIO.png"
+          />
+
+          <Box
+            component="form"
+            noValidate
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              width: "100%",
+            }}
+          >
+            <Grid container spacing={2} mt={0.5}>
+              <Grid item xs={12}>
+                <InputHookForm name="fullname" required label="Full Name" />
+              </Grid>
+              <Grid item xs={12}>
+                <InputHookForm name="email" required label="Email" />
+              </Grid>
+              <Grid item xs={12}>
+                <InputHookForm name="password" required label="Password" />
+              </Grid>
+              <Grid item xs={12}>
+                <InputHookForm name="phone" required label="Phone Number" />
+              </Grid>
+              <Grid item xs={12}>
+                <SelectHookForm
+                  name="country"
+                  label="Country"
+                  options={countryOptions}
+                />
+              </Grid>
+              <Grid item xs={12} lg={6}>
+                <SelectHookForm
+                  name="typeIdentification"
+                  label="Type of Identification"
+                  options={typeOfIdentificationList}
+                />
+              </Grid>
+              <Grid item xs={12} lg={6}>
+                <InputHookForm
+                  name="identification"
+                  required
+                  label="Identification"
+                />
+              </Grid>
+              <ActionButtons />
             </Grid>
-            <Grid item xs={12}>
-              <InputHookForm name="email" required label="Email" />
-            </Grid>
-            <Grid item xs={12}>
-              <InputHookForm
-                name="password"
-                // type="password"
-                required
-                label="Password"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <InputHookForm name="phone" required label="Phone Number" />
-            </Grid>
-            <Grid item xs={12}>
-              <SelectHookForm
-                name="country"
-                label="Country"
-                options={countryOptions}
-              />
-            </Grid>
-            <Grid item xs={12} lg={6}>
-              <SelectHookForm
-                name="typeIdentification"
-                label="Type of Identification"
-                options={typeOfIdentificationList}
-              />
-            </Grid>
-            <Grid item xs={12} lg={6}>
-              <InputHookForm
-                name="identification"
-                required
-                label="Identification"
-              />
-            </Grid>
-            <ActionButtons />
-          </Grid>
-        </Box>
-      </Card>
-    </FormProvider>
+          </Box>
+        </Card>
+      </FormProvider>
+    </OnboardingLayout>
   );
 }

@@ -18,8 +18,9 @@ const ActionButtons: React.FC = () => {
 
     if (step === 1) {
       updateCompanySignUpData(data);
-      // handleNext();
+      handleNext();
     }
+
   };
 
   return (
@@ -43,12 +44,11 @@ const ActionButtons: React.FC = () => {
           onClick={handleSubmit(handleSaveStep)}
           fullWidth
           variant="contained"
+          color="primary"
         >
           Next
         </Button>
       </Grid>
-
-      {/* {JSON.stringify(signUpData)} */}
     </>
   );
 };

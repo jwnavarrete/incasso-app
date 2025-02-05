@@ -180,7 +180,7 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
             <Typography sx={{ textAlign: 'center' }}>
               ¿Aún no tienes una cuenta?{' '}
               <Link
-              href="/users/sign_up_new"
+              href="/auth/sign_up_new"
               variant="body2"
               sx={{ alignSelf: 'center' }}
               >

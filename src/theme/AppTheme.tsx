@@ -8,6 +8,7 @@ import { dataDisplayCustomizations } from './customizations/dataDisplay';
 import { feedbackCustomizations } from './customizations/feedback';
 import { navigationCustomizations } from './customizations/navigation';
 import { surfacesCustomizations } from './customizations/surfaces';
+// import { colorSchemes, typography, shadows, shape } from './themePrimitives';
 import { colorSchemes, typography, shadows, shape } from './themePrimitives';
 
 interface AppThemeProps {

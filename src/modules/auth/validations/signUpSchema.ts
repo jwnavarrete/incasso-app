@@ -1,6 +1,8 @@
 import * as yup from "yup";
 
-const signUpSchema = yup.object().shape({
+const signUpSchema = yup.object().shape({});
+
+const _signUpSchema = yup.object().shape({
   fullname: yup
     .string()
     .required("Name is required")
@@ -13,10 +15,8 @@ const signUpSchema = yup.object().shape({
     .string()
     .required("Password is required")
     .min(8, "Password must be at least 8 characters long"),
-  phone: yup
-    .string()
-    .required("Phone number is required"),
-    // .matches(/^\+5997\d{7}$/, "Phone number must be a valid Bonaire number"),
+  phone: yup.string().required("Phone number is required"),
+  // .matches(/^\+5997\d{7}$/, "Phone number must be a valid Bonaire number"),
   country: yup.string().required("Country is required"),
   typeIdentification: yup
     .string()
@@ -24,7 +24,9 @@ const signUpSchema = yup.object().shape({
   identification: yup.string().required("Identification is required"),
 });
 
-const companyInfoSchema = yup.object().shape({
+const companyInfoSchema = yup.object().shape({});
+
+const _companyInfoSchema = yup.object().shape({
   name: yup
     .string()
     .required("Company name is required")
