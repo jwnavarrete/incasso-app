@@ -1,12 +1,10 @@
 import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { companyInfoSchema } from "@/modules/auth/validations/signUpSchema";
+import { companyInfoSchema } from "@/modules/auth/validations/signUp.schema";
 import { useForm, FormProvider } from "react-hook-form";
 import InputHookForm from "@/common/components/ui/InputHookForm";
-import Card from "@mui/material/Card";
 import { useAuthContext } from "@/modules/auth/context/authContext";
 import ActionButtons from "./ActionButons";
 import RangeHookForm from "@/common/components/ui/RangeHookForm";
@@ -15,11 +13,12 @@ import { countryOptions } from "@/common/utils/catalogo/CountryList";
 import { bonaireCompanyTypes } from "@/common/utils/catalogo/BonaireCompanyTypes";
 import HeaderInfoCard from "./HeaderInfoCard";
 import OnboardingLayout from "@/common/components/layout/OnboardingLayout";
+import CardContainer from "./CardContainer";
 
 export default function AccountInfoCard() {
   const { signUpData } = useAuthContext();
   const urlImage = "/static/images/auth/sign_up_2.jpg";
-  
+
   const methods = useForm({
     resolver: yupResolver(companyInfoSchema),
   });
@@ -35,22 +34,11 @@ export default function AccountInfoCard() {
   return (
     <OnboardingLayout backgroundImageUrl={urlImage}>
       <FormProvider {...methods}>
-        <Card
-          variant="outlined"
-          sx={{
-            p: 4,
-            width: "450px",
-            height: "auto", // Altura definida
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            overflow: "auto", // Activar scroll si el contenido crece
-          }}
-        >
+        <CardContainer>
           <HeaderInfoCard
             title="Company Information"
             subtitle="Enter details to continue"
-            logoSrc="/static/LogoCIO.png"
+            logoSrc={process.env.NEXT_PUBLIC_LOGO_URL || ""}
           />
           <Box
             component="form"
@@ -100,7 +88,7 @@ export default function AccountInfoCard() {
 
               <Grid item xs={12} lg={12}>
                 <RangeHookForm
-                  name="numberOfEmployes"
+                  name="numberOfEmployees"
                   label="Number of Employes"
                   ranges={["1-5", "10-20", "20-30", "40-50", "50-100", "100+"]}
                 />
@@ -109,7 +97,7 @@ export default function AccountInfoCard() {
               <ActionButtons />
             </Grid>
           </Box>
-        </Card>
+        </CardContainer>
       </FormProvider>
     </OnboardingLayout>
   );

@@ -1,25 +1,55 @@
 import axios from "axios";
-import { ITenantSignUp } from "../interfaces/singUp";
+import { ITenantSignUp } from "@/modules/auth/interfaces/singup.interface";
+import {
+  iSignIn,
+  iTokens,
+  iValidateSlugResponse,
+} from "@/modules/auth/interfaces/auth.interface";
+import { ErrorHandler } from "@/common/lib/errors";
 
 class AuthService {
-    private baseUrl: string;
+  constructor() {}
 
-    constructor() {
-        this.baseUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL || ""; // Reemplaza con la URL de tu API
-    }
+  async createClient(clientData: ITenantSignUp): Promise<iTokens> {
+    try {
+      const response = await axios.post("/api/proxy/auth/signup", clientData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-    async createClient(clientData: ITenantSignUp): Promise<any> {
-        try {
-            const response = await axios.post(
-                `${this.baseUrl}/clients/register`,
-                clientData
-            );
-            return response.data;
-        } catch (error) {
-            console.error("Error creating client:", error);
-            throw error;
-        }
+      return response.data;
+    } catch (error) {
+      console.error("Error creating client:", error);
+      throw error;
     }
+  }
+
+  async signIn(param: iSignIn): Promise<iTokens | null> {
+    try {
+      const response = await axios.post("/api/proxy/auth/signin", {
+        email: param.email,
+        password: param.password,
+        subdomain: param.subdomain,
+      });
+      return response.data;
+    } catch (error) {
+      ErrorHandler.handle(error);
+    }
+  }
+
+  async validateSlug(slug: string): Promise<iValidateSlugResponse> {
+    try {
+      const response = await axios.post("/api/proxy/auth/validate-subdomain", {
+        subdomain: slug,
+      });
+
+      return response.data;
+    } catch (error) {
+      console.error("Error validating slug:", error);
+      throw error;
+    }
+  }
 }
 
 export default AuthService;

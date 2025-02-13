@@ -9,7 +9,6 @@ import {
     FormHelperText,
 } from "@mui/material";
 import { useFormContext, Controller, FieldValues } from "react-hook-form";
-import * as yup from "yup";
 
 interface RangeHookFormProps {
     ranges: string[];

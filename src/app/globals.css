@@ -1,0 +1,5 @@
+@media (prefers-color-scheme: dark) {
+    .logo {
+      color: #ffffff; /* Color del texto en modo oscuro (blanco) */
+    }
+  }

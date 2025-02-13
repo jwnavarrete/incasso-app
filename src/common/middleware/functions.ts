@@ -1,0 +1,90 @@
+import { NextResponse } from "next/server";
+import { DOMAIN_NAME } from "@/common/middleware/constantes";
+import axios from "axios";
+
+const setActiveSlugLogin = (subdomain: string) => {
+  const response = NextResponse.redirect(
+    new URL(`https://${subdomain}.${DOMAIN_NAME}/`)
+  );
+  response.cookies.set("active_account_slugs", subdomain, {
+    path: "/",
+    domain: `${subdomain}.${DOMAIN_NAME}`,
+  });
+  return response;
+};
+
+const showNext = () => {
+  return NextResponse.next();
+};
+const showLoginCompany = () => {
+  return NextResponse.redirect(
+    new URL(`https://auth.${DOMAIN_NAME}/auth/login_company`)
+  );
+};
+
+const showSlugLogin = (active_account_slugs: string, subdomain: string) => {
+  let subdomainRedirect = subdomain;
+
+  if (active_account_slugs) {
+    subdomainRedirect = active_account_slugs;
+  }
+  const response = NextResponse.redirect(
+    new URL(
+      `https://${subdomainRedirect}.${DOMAIN_NAME}/auth/login_company/email_password`
+    )
+  );
+
+  response.cookies.set("active_account_slugs", subdomainRedirect, {
+    path: "/",
+    domain: `${subdomainRedirect}.${DOMAIN_NAME}`,
+  });
+  return response;
+};
+
+const showSlug_not_found = () => {
+  return NextResponse.redirect(
+    new URL(`https://auth.${DOMAIN_NAME}/auth/slug_not_found`)
+  );
+};
+
+const showSlugDashboard = (active_account_slugs: string, subdomain: string) => {
+  let subdomainRedirect = subdomain;
+
+  if (active_account_slugs) {
+    subdomainRedirect = active_account_slugs;
+  }
+  return NextResponse.redirect(
+    new URL(`https://${subdomainRedirect}.${DOMAIN_NAME}`)
+  );
+};
+
+const showLandigPage = () => {
+  return NextResponse.redirect(new URL(`https://${DOMAIN_NAME}`));
+};
+
+const isValidSubdomain = async (subdomain: string): Promise<boolean> => {
+  try {
+    // Lógica para validar subdominio
+    const response = await axios.post(
+      `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/auth/validate-subdomain`,
+      {
+        subdomain,
+      }
+    );
+
+    return response.data.isValid;
+  } catch (error) {
+    return false;
+  }
+};
+
+export {
+  setActiveSlugLogin,
+  showLoginCompany,
+  showSlugLogin,
+  showSlug_not_found,
+  showSlugDashboard,
+  showLandigPage,
+  isValidSubdomain,
+  showNext,
+};

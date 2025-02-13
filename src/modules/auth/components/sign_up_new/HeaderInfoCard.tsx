@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
-import Image from "next/image";
+import LogoComponent from "@/common/components/ui/LogoComponent";
 
 interface HeaderInfoCardProps {
   title: string;
@@ -8,11 +8,7 @@ interface HeaderInfoCardProps {
   logoSrc: string;
 }
 
-const HeaderInfoCard: React.FC<HeaderInfoCardProps> = ({
-  title,
-  subtitle,
-  logoSrc,
-}) => {
+const HeaderInfoCard: React.FC<HeaderInfoCardProps> = ({ title, subtitle }) => {
   return (
     <Box
       sx={{
@@ -42,7 +38,7 @@ const HeaderInfoCard: React.FC<HeaderInfoCardProps> = ({
           {subtitle}
         </Typography>
       </Box>
-      <Image src={logoSrc} alt={"Logo"} width={120} height={57} />
+      <LogoComponent />
     </Box>
   );
 };

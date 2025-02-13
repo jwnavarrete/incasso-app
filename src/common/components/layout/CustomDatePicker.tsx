@@ -64,8 +64,9 @@ export default function CustomDatePicker() {
         label={value == null ? null : value.format('MMM DD, YYYY')}
         onChange={(newValue) => setValue(newValue)}
         slots={{ field: ButtonField }}
+        disabled={true}
         slotProps={{
-          field: { setOpen } as ButtonFieldProps,
+          // field: { setOpen } as ButtonFieldProps,
           nextIconButton: { size: 'small' },
           previousIconButton: { size: 'small' },
         }}

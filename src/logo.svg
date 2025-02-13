@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" width="200" height="100">
+  <!-- Fondo del logo (opcional) -->
+  <rect width="200" height="100" fill="transparent" />
+
+  <!-- Texto del logo que cambia de color -->
+  <text x="50%" y="50%" fill="currentColor" font-size="24" text-anchor="middle" dominant-baseline="middle">
+    MiLogo
+  </text>
+</svg>

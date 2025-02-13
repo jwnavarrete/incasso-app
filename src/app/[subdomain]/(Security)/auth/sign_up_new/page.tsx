@@ -1,22 +1,27 @@
 "use client";
-import * as React from "react";
+import React, { Suspense } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
-import AppTheme from "@/theme/AppTheme";
 import ColorModeSelect from "@/theme/ColorModeSelect";
 import { AuthProvider } from "@/modules/auth/context/authContext";
 import SignUpNew from "@/modules/auth/components/sign_up_new";
+import LoadingUI from "@/common/components/ui/LoadingUI";
 
-export default function page(props: { disableCustomTheme?: boolean }) {
+export default function page() {
   return (
     <AuthProvider>
-      <AppTheme {...props}>
         <CssBaseline enableColorScheme />
-        {/* <ColorModeSelect
-          sx={{ position: "fixed", top: "1rem", right: "1rem" }}
-        /> */}
+        <ColorModeSelect
+          sx={{
+            position: "fixed",
+            top: "1rem",
+            left: "1rem",
+            display: { xs: "none", sm: "block" },
+          }}
+        />
 
-        <SignUpNew />
-      </AppTheme>
+        <Suspense fallback={<LoadingUI />}>
+          <SignUpNew />
+        </Suspense>      
     </AuthProvider>
   );
 }

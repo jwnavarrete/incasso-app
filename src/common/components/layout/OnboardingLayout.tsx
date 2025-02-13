@@ -1,6 +1,6 @@
 import React from "react";
-import { Box } from "@mui/material";
-import Image from 'next/image';
+import { Box, useMediaQuery, useTheme } from "@mui/material";
+import Image from "next/image";
 
 interface OnboardingLayoutProps {
   children: React.ReactNode;
@@ -15,38 +15,38 @@ const OnboardingLayout: React.FC<OnboardingLayoutProps> = ({
   leftWidthPercentage = "60%",
   rightWidthPercentage = "40%",
 }) => {
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
+
   return (
     <Box
       display="flex"
-      height="100vh" // Ocupa toda la altura de la pantalla
-      sx={{ overflow: "hidden" }} // Evita el desbordamiento
+      height="100vh"
+      sx={{ overflow: "hidden" }}
     >
-      {/* Sección del formulario (izquierda) */}
       <Box
         display="flex"
         flexDirection="column"
         justifyContent="center"
         alignItems="center"
-        // maxHeight={600}
-        width={leftWidthPercentage} // Ocupa el porcentaje especificado
-        p={4} // Padding interno
+        width={isSmallScreen ? "100%" : leftWidthPercentage}
+        p={4}
       >
         {children}
       </Box>
 
-      {/* Sección de la imagen (derecha) */}
-      <Box
-        width={rightWidthPercentage} // Ocupa el porcentaje especificado
-        position="relative"
-      >
-        <Image
-          src={backgroundImageUrl} // URL de la imagen
-          layout="fill" // Ocupa todo el espacio del contenedor
-        //   objectFit="cover" // La imagen ocupa todo el espacio y se recorta si es necesario
-        //   objectPosition="center" // Centra la imagen
-          alt="Background Image" // Texto alternativo
-        />
-      </Box>
+      {!isSmallScreen && (
+        <Box
+          width={rightWidthPercentage}
+          position="relative"
+        >
+          <Image
+            src={backgroundImageUrl}
+            layout="fill"
+            alt="Background Image"
+          />
+        </Box>
+      )}
     </Box>
   );
 };

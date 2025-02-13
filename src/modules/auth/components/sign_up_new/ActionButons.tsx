@@ -5,8 +5,13 @@ import { useAuthContext } from "@/modules/auth/context/authContext";
 import { useFormContext } from "react-hook-form";
 
 const ActionButtons: React.FC = () => {
-  const { step, signUpData, handleNext, handleBack, updateUserSignUpData, updateCompanySignUpData } =
-    useAuthContext();
+  const {
+    step,
+    handleNext,
+    handleBack,
+    updateUserSignUpData,
+    updateCompanySignUpData,
+  } = useAuthContext();
 
   const { handleSubmit } = useFormContext();
 
@@ -20,7 +25,6 @@ const ActionButtons: React.FC = () => {
       updateCompanySignUpData(data);
       handleNext();
     }
-
   };
 
   return (

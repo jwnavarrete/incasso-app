@@ -1,19 +1,22 @@
-"use client";
+import * as React from "react";
+import MuiAvatar from "@mui/material/Avatar";
+import MuiListItemAvatar from "@mui/material/ListItemAvatar";
+import MenuItem from "@mui/material/MenuItem";
+import ListItemText from "@mui/material/ListItemText";
+import ListSubheader from "@mui/material/ListSubheader";
+import Select, { SelectChangeEvent, selectClasses } from "@mui/material/Select";
+import { styled } from "@mui/material/styles";
+import { FaHome } from "react-icons/fa";
 
-import * as React from 'react';
-import MuiAvatar from '@mui/material/Avatar';
-import MuiListItemAvatar from '@mui/material/ListItemAvatar';
-import MenuItem from '@mui/material/MenuItem';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListSubheader from '@mui/material/ListSubheader';
-import Select, { SelectChangeEvent, selectClasses } from '@mui/material/Select';
-import Divider from '@mui/material/Divider';
-import { styled } from '@mui/material/styles';
-import AddRoundedIcon from '@mui/icons-material/AddRounded';
-import DevicesRoundedIcon from '@mui/icons-material/DevicesRounded';
-import SmartphoneRoundedIcon from '@mui/icons-material/SmartphoneRounded';
-import ConstructionRoundedIcon from '@mui/icons-material/ConstructionRounded';
+import api from "@/common/lib/axiosInstance";
+import {
+  Tenant,
+  TenantsResponse,
+} from "@/modules/auth/interfaces/tenant.interface";
+import { getClientSessionByCode } from "@/common/lib/session";
+import useClientRouter from "@/common/hooks/useNavigations";
+import { useSelector } from "react-redux";
+import { AppState } from "@/common/store/global.store"; // Adjust the import path as necessary
 
 const Avatar = styled(MuiAvatar)(({ theme }) => ({
   width: 28,
@@ -29,10 +32,41 @@ const ListItemAvatar = styled(MuiListItemAvatar)({
 });
 
 export default function SelectContent() {
-  const [company, setCompany] = React.useState('');
+  const [company, setCompany] = React.useState("");
+  const [tenants, setTenants] = React.useState<Tenant[] | null>(null);
+  const { redirectToSlug } = useClientRouter(); // Usamos el hook aquí, dentro del componente
+  const user = useSelector((state: AppState) => state.user);
+
+  React.useEffect(() => {
+    api.get("/tenant?email=" + user?.email).then((response) => {
+      const data: TenantsResponse = response.data;
+      setTenants(data.tenants);
+
+      if (data.tenants?.length > 0) {
+        const subdomain = getSubdomainFromUrl();
+
+        // const activeTenant = getClientSessionByCode("active_account_slugs");
+        if (subdomain) {
+          setCompany(subdomain); // Selecciona el primer tenant por defecto
+        }
+      }
+    });
+  }, []);
+
+  const getSubdomainFromUrl = () => {
+    const hostname = window.location.hostname;
+    const parts = hostname.split(".");
+    if (parts.length > 2) {
+      return parts[0];
+    }
+    return null;
+  };
 
   const handleChange = (event: SelectChangeEvent) => {
-    setCompany(event.target.value as string);
+    if (event.target.value) {
+      redirectToSlug(event.target.value); // Usamos la función aquí
+    }
+    // setCompany(event.target.value as string);
   };
 
   return (
@@ -42,63 +76,37 @@ export default function SelectContent() {
       value={company}
       onChange={handleChange}
       displayEmpty
-      inputProps={{ 'aria-label': 'Select company' }}
+      inputProps={{ "aria-label": "Select company" }}
       fullWidth
       sx={{
         maxHeight: 56,
         width: 215,
-        '&.MuiList-root': {
-          p: '8px',
+        mt: user?.emailVerified ? 0 : 7,
+        "&.MuiList-root": {
+          p: "8px",
         },
         [`& .${selectClasses.select}`]: {
-          display: 'flex',
-          alignItems: 'center',
-          gap: '2px',
+          display: "flex",
+          alignItems: "center",
+          gap: "2px",
           pl: 1,
         },
       }}
     >
       <ListSubheader sx={{ pt: 0 }}>Production</ListSubheader>
-      <MenuItem value="">
-        <ListItemAvatar>
-          <Avatar alt="Sitemark web">
-            <DevicesRoundedIcon sx={{ fontSize: '1rem' }} />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Sitemark-web" secondary="Web app" />
-      </MenuItem>
-      <MenuItem value={10}>
-        <ListItemAvatar>
-          <Avatar alt="Sitemark App">
-            <SmartphoneRoundedIcon sx={{ fontSize: '1rem' }} />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Sitemark-app" secondary="Mobile application" />
-      </MenuItem>
-      <MenuItem value={20}>
-        <ListItemAvatar>
-          <Avatar alt="Sitemark Store">
-            <DevicesRoundedIcon sx={{ fontSize: '1rem' }} />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Sitemark-Store" secondary="Web app" />
-      </MenuItem>
-      <ListSubheader>Development</ListSubheader>
-      <MenuItem value={30}>
-        <ListItemAvatar>
-          <Avatar alt="Sitemark Store">
-            <ConstructionRoundedIcon sx={{ fontSize: '1rem' }} />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Sitemark-Admin" secondary="Web app" />
-      </MenuItem>
-      <Divider sx={{ mx: -1 }} />
-      <MenuItem value={40}>
-        <ListItemIcon>
-          <AddRoundedIcon />
-        </ListItemIcon>
-        <ListItemText primary="Add product" secondary="Web app" />
-      </MenuItem>
+      {tenants?.map((tenant) => (
+        <MenuItem key={tenant.id} value={tenant.subdomain}>
+          <ListItemAvatar>
+            <Avatar alt={tenant.client.name}>
+              <FaHome />
+            </Avatar>
+          </ListItemAvatar>
+          <ListItemText
+            primary={tenant.client.name}
+            secondary={tenant.subdomain}
+          />
+        </MenuItem>
+      ))}
     </Select>
   );
 }

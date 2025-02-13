@@ -2,10 +2,9 @@ import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { signUpSchema } from "@/modules/auth/validations/signUpSchema";
+import { signUpSchema } from "@/modules/auth/validations/signUp.schema";
 import { useForm, FormProvider } from "react-hook-form";
 import InputHookForm from "@/common/components/ui/InputHookForm";
-import Card from "@mui/material/Card";
 import { useAuthContext } from "@/modules/auth/context/authContext";
 import ActionButtons from "./ActionButons";
 import SelectHookForm from "@/common/components/ui/SelectHookForm";
@@ -13,6 +12,9 @@ import { typeOfIdentificationList } from "@/common/utils/catalogo/TypeOfIdentifi
 import { countryOptions } from "@/common/utils/catalogo/CountryList";
 import HeaderInfoCard from "./HeaderInfoCard";
 import OnboardingLayout from "@/common/components/layout/OnboardingLayout";
+import Link from "next/link";
+import { Button, Typography } from "@mui/material";
+import CardContainer from "./CardContainer";
 
 export default function AccountInfoCard() {
   const { signUpData } = useAuthContext();
@@ -33,22 +35,11 @@ export default function AccountInfoCard() {
   return (
     <OnboardingLayout backgroundImageUrl={urlImage}>
       <FormProvider {...methods}>
-        <Card
-          variant="outlined"
-          sx={{
-            p: 4,
-            width: "450px",
-            height: "auto", // Altura definida
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            overflow: "auto", // Activar scroll si el contenido crece
-          }}
-        >
+        <CardContainer>
           <HeaderInfoCard
             title="User Information"
             subtitle="Enter details to continue"
-            logoSrc="/static/LogoCIO.png"
+            logoSrc={process.env.NEXT_PUBLIC_LOGO_URL || ""}
           />
 
           <Box
@@ -97,8 +88,22 @@ export default function AccountInfoCard() {
               <ActionButtons />
             </Grid>
           </Box>
-        </Card>
+        </CardContainer>
       </FormProvider>
+
+      <Box
+        sx={{
+          mt: 2,
+          textAlign: "center",
+        }}
+      >
+        <Typography variant="body2" align="center" sx={{ mt: 2 }}>
+          <span>Don't have an account yet?</span>
+          <Link href="/auth/login_company" passHref>
+            <Button variant="text">login</Button>
+          </Link>
+        </Typography>
+      </Box>
     </OnboardingLayout>
   );
 }

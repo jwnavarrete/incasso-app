@@ -1,14 +1,13 @@
 "use client";
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import Langind from "./landing/page";
+import LandingComponent from "@/common/components/landing";
 
-export default function Home() { 
-  // const router = useRouter();
 
-  // useEffect(() => {
-  //   router.push("http://localhost:3000/");
-  // }, []);
-  
-  return <Langind />;
-}
+const LandingPage: React.FC = () => {
+  return (
+    <>
+      <LandingComponent />
+    </>
+  );
+};
+
+export default LandingPage;

@@ -1,22 +1,37 @@
-import React, { createContext, useContext, ReactNode, useState } from "react";
+"use client";
+import React, {
+  createContext,
+  useContext,
+  ReactNode,
+  useState,
+  useMemo,
+} from "react";
 import {
   ICompany,
   initialTenantSignUp,
   ITenantSignUp,
   IUser,
-} from "@/modules/auth/interfaces/singUp";
+} from "@/modules/auth/interfaces/singup.interface";
 import AuthService from "../services/auth.services";
+import { updateAccountSlugs } from "../services/functions";
+import {
+  iSignIn,
+  iTokens,
+  iValidateSlugResponse,
+} from "@/modules/auth/interfaces/auth.interface";
+import { ErrorHandler } from "@/common/lib/errors";
 
 interface AuthContextProps {
-  login: (data: IUser) => void;
-  logout: () => void;
+  signIn: (data: iSignIn) => Promise<iTokens>;
   step: number;
   signUpData: ITenantSignUp;
   handleNext: () => void;
   handleBack: () => void;
   updateUserSignUpData: (userData: Partial<IUser>) => void;
   updateCompanySignUpData: (companyData: Partial<ICompany>) => void;
-  handleSaveClient: () => Promise<string>;
+  validateSlug: (slug: string) => Promise<iValidateSlugResponse>;
+  signUp: () => Promise<iTokens>;
+  loading: boolean;
 }
 
 interface AuthProviderProps {
@@ -27,15 +42,10 @@ const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [step, setStep] = useState(0);
+  const [loading, setLoading] = useState(false);
   const [signUpData, setSignUpData] =
     useState<ITenantSignUp>(initialTenantSignUp);
 
-  const updateTermsAndConditions = (acceptTermsAndConditions: boolean) => {
-    setSignUpData((prevData) => ({
-      ...prevData,
-      acceptTermsAndConditions,
-    }));
-  };
   const updateUserSignUpData = (userData: Partial<IUser>) => {
     setSignUpData((prevData) => ({
       ...prevData,
@@ -56,14 +66,22 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }));
   };
 
-  const login = (data: IUser) => {
-    // Implement login logic here
-    console.log("Login data:", data);
-  };
+  const signIn = async (data: iSignIn): Promise<iTokens> => {
+    const authService = new AuthService();
+    try {
+      setLoading(true);
+      const response = await authService.signIn(data);
 
-  const logout = () => {
-    // Implement logout logic here
-    console.log("Logged out");
+      if (!response) {
+        throw new Error("SignIn failed, response is null");
+      }
+
+      return response;
+    } catch (error) {
+      ErrorHandler.handle(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleNext = () => {
@@ -74,38 +92,52 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setStep((prevStep) => prevStep - 1);
   };
 
-  const handleSaveClient = async () => {
-    // const authService = new AuthService();
+  const validateSlug = async (slug: string): Promise<iValidateSlugResponse> => {
+    const authService = new AuthService();
+    try {
+      setLoading(true);
 
-    console.log("Creating client:", signUpData);
-    // authService
-    //   .createClient(signUpData)
-    //   .then((response) => {
-    //     console.log("Client created successfully:", response);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error creating client:", error);
-    //   });
+      const response = await authService.validateSlug(slug);
+      if (!response) {
+        throw new Error("Validate slug failed, response is null");
+      }
 
-    return "Finish";
+      return response;
+    } catch (error) {
+      throw error;
+    } finally {
+      setLoading(false);
+    }
   };
 
+  const signUp = async (): Promise<iTokens> => {
+    const authService = new AuthService();
+    try {
+      const response = await authService.createClient(signUpData);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const contextValue = useMemo(
+    () => ({
+      step,
+      signUpData,
+      loading,
+      signIn,
+      handleNext,
+      handleBack,
+      updateUserSignUpData,
+      updateCompanySignUpData,
+      signUp,
+      validateSlug,
+    }),
+    [step, signUpData, loading]
+  );
+
   return (
-    <AuthContext.Provider
-      value={{
-        login,
-        logout,
-        step,
-        signUpData,
-        handleNext,
-        handleBack,
-        updateUserSignUpData,
-        updateCompanySignUpData,
-        handleSaveClient,
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
   );
 };
 

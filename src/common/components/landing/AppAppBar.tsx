@@ -98,7 +98,7 @@ export default function AppAppBar() {
                 Sign in
               </Button>
             </Link>
-            <Link href={`http://auth.${process.env.NEXT_PUBLIC_DOMAIN_NAME}/auth/sign_up_new`} passHref>
+            <Link href={`https://auth.${process.env.NEXT_PUBLIC_DOMAIN_NAME}/auth/sign_up_new`} passHref>
               <Button color="primary" variant="contained" size="small">
               Sign up
               </Button>

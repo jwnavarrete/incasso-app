@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "cross-env NODE_OPTIONS='--inspect' next dev --turbopack",
+    "dev:secure": "ts-node server.ts",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -22,25 +23,38 @@
     "@mui/x-date-pickers": "^7.24.1",
     "@mui/x-tree-view": "^7.24.1",
     "@react-spring/web": "^9.7.5",
+    "@reduxjs/toolkit": "^2.5.1",
     "axios": "^1.7.9",
     "chroma-js": "^3.1.2",
     "clsx": "^2.1.1",
+    "cross-env": "^7.0.3",
     "dayjs": "^1.11.13",
+    "js-cookie": "^3.0.5",
     "jwt-decode": "^4.0.0",
     "next": "15.1.6",
+    "next-iron-session": "^4.2.0",
+    "nookies": "^2.5.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.54.2",
+    "react-icons": "^5.4.0",
+    "react-redux": "^9.2.0",
+    "react-toastify": "^11.0.3",
     "styled-components": "^6.1.14",
-    "yup": "^1.6.1"
+    "sweetalert2": "^11.16.0",
+    "universal-cookie": "^7.2.2",
+    "yup": "^1.6.1",
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@types/js-cookie": "^3.0.6",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.1.6",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
   }
 }
