@@ -1,6 +1,10 @@
 const DOMAIN_NAME = process.env.NEXT_PUBLIC_DOMAIN_NAME || "";
 
-const allowedDomains = ["incassoapp.test", "incassoapp"];
+const allowedDomains = [
+  "incasso-app.vercel.app",
+  "incasso-app",
+  "incasso-app.vercel",
+];
 
 const allowedLandingPath = ["/"];
 
@@ -9,7 +13,7 @@ const allowedAuthPaths = [
   "/auth/slug_not_found",
   "/auth/sign_up_new",
   "/auth/login_company/get_account_url",
-  "/auth/login_company/enter_slug",  
+  "/auth/login_company/enter_slug",
 ];
 
 const allowTenantPaths = [
