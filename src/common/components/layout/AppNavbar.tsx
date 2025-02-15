@@ -12,7 +12,7 @@ import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
 import SideMenuMobile from "@/common/components/layout/SideMenuMobile";
 import MenuButton from "./MenuButton";
-import ColorModeIconDropdown from "@/theme/ColorModeIconDropdown";
+import ColorModeIconDropdown from "@/theme/ColorModeSelector/ColorModeIconDropdown";
 import { useSelector } from "react-redux";
 import { AppState } from "@/common/store/global.store"; // Adjust the import path as necessary
 
@@ -46,7 +46,6 @@ export default function AppNavbar() {
       sx={{
         display: { xs: "auto", md: "none" },
         boxShadow: 0,
-        mt: user?.country ? 7 : 0,
         bgcolor: "background.paper",
         backgroundImage: "none",
         borderBottom: "1px solid",
@@ -68,13 +67,13 @@ export default function AppNavbar() {
             spacing={1}
             sx={{ justifyContent: "center", mr: "auto" }}
           >
-            <CustomIcon />
+            {/* <CustomIcon /> */}
             <Typography
               variant="h4"
               component="h1"
               sx={{ color: "text.primary" }}
             >
-              Dashboard
+              {user?.company}
             </Typography>
           </Stack>
           <ColorModeIconDropdown />

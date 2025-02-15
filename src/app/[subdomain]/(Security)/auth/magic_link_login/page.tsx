@@ -9,7 +9,7 @@ export default function page() {
   return (
     <AuthProvider>
       <CssBaseline enableColorScheme />
-
+      
       <Suspense fallback={<LoadingUI />}>
         <MagicLinkLogin />
       </Suspense>

@@ -6,6 +6,7 @@ import { AuthProvider } from "@/modules/auth/context/authContext";
 import EmailAndPassword from "@/modules/auth/components/email_password";
 import LoadingUI from "@/common/components/ui/LoadingUI";
 import useAuthenticate from "@/common/hooks/useAuthenticate";
+import ColorMode from "@/theme/ColorModeSelector";
 
 export default function page() {
   const isAuthenticated = useAuthenticate();
@@ -17,10 +18,12 @@ export default function page() {
   return (
     <AuthProvider>
       <CssBaseline enableColorScheme />
-      <ColorModeSelect sx={{ position: "fixed", top: "1rem", left: "1rem" }} />
+      <ColorMode />
+     
       <Suspense fallback={<LoadingUI />}>
         <EmailAndPassword />
       </Suspense>
+
     </AuthProvider>
   );
 }

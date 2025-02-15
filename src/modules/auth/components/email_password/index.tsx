@@ -7,6 +7,7 @@ import {
   Grid,
   Box,
   Divider,
+  Fab,
 } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { FormProvider, useForm } from "react-hook-form";
@@ -20,6 +21,7 @@ import { notifySuccess } from "@/common/lib/notifications";
 import { setAuthSession } from "@/common/lib/session";
 import useClientRouter from "@/common/hooks/useNavigations";
 import LogoComponent from "@/common/components/ui/LogoComponent";
+import ColorMode from "@/theme/ColorModeSelector";
 
 const EmailPasswordComponent: React.FC = () => {
   const router = useRouter();
@@ -156,6 +158,7 @@ const EmailPasswordComponent: React.FC = () => {
           Login to another account
         </Button>
       </Box>
+      
     </Container>
   );
 };

@@ -160,15 +160,27 @@ const TermsAndConditionsCard = () => {
           </Box>
 
           {/* Botón Crear cuenta */}
-          <Box display="flex" justifyContent="space-between" marginTop={3}>
-            <Button variant="outlined" color="primary" onClick={handleBack}>
+          <Box
+            display="flex"
+            justifyContent={{ xs: "center", md: "space-between" }}
+            flexDirection={{ xs: "column", md: "row" }}
+            alignItems="center"
+            marginTop={3}
+          >
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={handleBack}
+              sx={{ width: { xs: "100%", md: "auto" }, mb: { xs: 1, md: 0 } }}
+            >
               Regresar
             </Button>
             <Button
               variant="contained"
               color="primary"
               onClick={handleCreateAccount}
-              disabled={!signUpData.company.termsAccepted} // Deshabilitar el botón hasta que el usuario acepte los términos
+              disabled={!signUpData.company.termsAccepted}
+              sx={{ width: { xs: "100%", md: "auto" } }}
             >
               Crear cuenta
             </Button>

@@ -4,15 +4,21 @@ import * as React from "react";
 import DarkModeIcon from "@mui/icons-material/DarkModeRounded";
 import LightModeIcon from "@mui/icons-material/LightModeRounded";
 import Box from "@mui/material/Box";
-import IconButton, { IconButtonOwnProps } from "@mui/material/IconButton";
+import Fab from "@mui/material/Fab";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { useColorScheme } from "@mui/material/styles";
+import IconButton, { IconButtonOwnProps } from "@mui/material/IconButton";
 
-export default function ColorModeIconDropdown(props: IconButtonOwnProps) {
+export default function ColorModeSelectFab(props: IconButtonOwnProps) {
   const { mode, systemMode, setMode } = useColorScheme();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [loading, setLoading] = React.useState(true);
   const open = Boolean(anchorEl);
+
+  React.useEffect(() => {
+    setLoading(false);
+  }, [mode]);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -26,6 +32,10 @@ export default function ColorModeIconDropdown(props: IconButtonOwnProps) {
     setMode(targetMode);
     handleClose();
   };
+
+  if(loading){
+    return null;
+  }
 
   if (!mode) {
     return (
@@ -50,7 +60,7 @@ export default function ColorModeIconDropdown(props: IconButtonOwnProps) {
   }[resolvedMode];
   return (
     <React.Fragment>
-      <IconButton
+      <Fab
         data-screenshot="toggle-mode"
         onClick={handleClick}
         disableRipple
@@ -58,13 +68,19 @@ export default function ColorModeIconDropdown(props: IconButtonOwnProps) {
         aria-controls={open ? "color-scheme-menu" : undefined}
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
+        sx={{
+          position: "fixed",
+          bottom: 16,
+          right: 16,
+        }}
+        color="primary"
         {...props}
       >
         {icon}
-      </IconButton>
+      </Fab>
       <Menu
         anchorEl={anchorEl}
-        id="account-menu"
+        id="color-scheme-menu"
         open={open}
         onClose={handleClose}
         onClick={handleClose}

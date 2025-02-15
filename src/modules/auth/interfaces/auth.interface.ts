@@ -8,6 +8,7 @@ export interface iIdToken {
   identification: string;
   tenantId: string;
   subdomain: string;
+  company: string;
   role: string;
   emailVerified: boolean;
 }

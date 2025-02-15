@@ -14,6 +14,8 @@ import MenuContent from "./MenuContent";
 import CardAlert from "./CardAlert";
 import { clearClientSession } from "@/common/lib/session";
 import useClientRouter from "@/common/hooks/useNavigations";
+import { useSelector } from "react-redux";
+import { AppState } from "@/common/store/global.store"; // Adjust the import path as necessary
 interface SideMenuMobileProps {
   open: boolean | undefined;
   toggleDrawer: (newOpen: boolean) => () => void;
@@ -24,6 +26,7 @@ export default function SideMenuMobile({
   toggleDrawer,
 }: SideMenuMobileProps) {
   const { redirectTo } = useClientRouter();
+  const user = useSelector((state: AppState) => state.user);
 
   const handleLogout = () => {
     clearClientSession();
@@ -56,12 +59,12 @@ export default function SideMenuMobile({
           >
             <Avatar
               sizes="small"
-              alt="Riley Carter"
-              src="/static/images/avatar/7.jpg"
+              alt={user?.fullname}
+              // src="/static/images/avatar/7.jpg"
               sx={{ width: 24, height: 24 }}
             />
             <Typography component="p" variant="h6">
-              Riley Carter
+              {user?.fullname}
             </Typography>
           </Stack>
           <MenuButton showBadge>

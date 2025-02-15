@@ -18,7 +18,7 @@ export const TenantMiddleware = async (subdomain: string, req: NextRequest) => {
   if (subdomain === "auth") {
     return null;
   }
-  
+
   const cookies = req.cookies;
   const url = new URL(req.url);
   const path = url.pathname;
@@ -38,6 +38,8 @@ export const TenantMiddleware = async (subdomain: string, req: NextRequest) => {
 
   // LOS DOMINIOS PRINCIPALES NO TIENES TOKEN DE ACCESO
   if (isPrincipalDomain) {
+    console.log("isPrincipalDomain", isPrincipalDomain);
+    console.log("isAllowdAuthPath", isAllowdAuthPath);
     // SI ESTA INTENTANDO ACCEDER A UNA RUTA DE AUTH REDIRIGE A LA PAGINA DE LOGIN
     if (isAllowdAuthPath) {
       // REDIRIGE A LA ULTIMA SESION DE LOGIN EN CASO DE QUE EXISTA,
@@ -49,7 +51,7 @@ export const TenantMiddleware = async (subdomain: string, req: NextRequest) => {
       }
     } else {
       // SI NO ES UN DOMINIO PRINCIPAL Y LA RUTA ES SOLO PARA TENANT, REDIRIGE AL LOGIN
-      if (publicTenantPaths) {
+      if (isAllowPublicPath) {
         return showLoginCompany();
       }
       // SI ES UNA RUTA PRIVADA REDIRIGE A LA PAGINA DE LOGIN
@@ -63,6 +65,7 @@ export const TenantMiddleware = async (subdomain: string, req: NextRequest) => {
 
   // SI NO HAY TOKEN DE REFRESCO
   if (!refreshToken) {
+    console.log("NO HAY TOKEN DE REFRESCO");
     // SI NO ES UNA RUTA PERMITIDA REDIRIGE A LA PAGINA DE LOGIN
     if (!isAllowPublicPath) {
       return showSlugLogin(active_account_slugs, subdomain);
@@ -82,7 +85,7 @@ export const TenantMiddleware = async (subdomain: string, req: NextRequest) => {
     }
     // SI YA ESTA AUTENTICADO REDIRIGE A LA PAGINA PRINCIPAL
     if (isAllowPublicPath) {
-      return setActiveSlugLogin(subdomain);
+      return showSlugDashboard(active_account_slugs, subdomain);
     }
   }
 

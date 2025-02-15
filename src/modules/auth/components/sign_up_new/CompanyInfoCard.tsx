@@ -89,7 +89,7 @@ export default function AccountInfoCard() {
               <Grid item xs={12} lg={12}>
                 <RangeHookForm
                   name="numberOfEmployees"
-                  label="Number of Employes"
+                  label="Number of Employes"                  
                   ranges={["1-5", "10-20", "20-30", "40-50", "50-100", "100+"]}
                 />
               </Grid>

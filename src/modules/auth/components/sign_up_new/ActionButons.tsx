@@ -29,29 +29,30 @@ const ActionButtons: React.FC = () => {
 
   return (
     <>
-      <Grid item xs={4}>
-        {step > 0 && (
+      <Grid container justifyContent="space-between" mt={2} spacing={1} margin={1}>
+        <Grid item xs={12} md={4}>
+          {step > 0 && (
+            <Button
+              type="button"
+              onClick={handleBack}
+              fullWidth
+              variant="outlined"
+            >
+              Back
+            </Button>
+          )}
+        </Grid>
+        <Grid item xs={12} lg={4}>
           <Button
             type="button"
-            onClick={handleBack}
+            onClick={handleSubmit(handleSaveStep)}
             fullWidth
-            variant="outlined"
+            variant="contained"
+            color="primary"
           >
-            Back
+            Next
           </Button>
-        )}
-      </Grid>
-      <Grid item xs={4}></Grid>
-      <Grid item xs={12} lg={4}>
-        <Button
-          type="button"
-          onClick={handleSubmit(handleSaveStep)}
-          fullWidth
-          variant="contained"
-          color="primary"
-        >
-          Next
-        </Button>
+        </Grid>
       </Grid>
     </>
   );
