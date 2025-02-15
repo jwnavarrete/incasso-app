@@ -14,15 +14,15 @@ export default async function middleware(req: NextRequest) {
   const subdomain = hostname.split(".")[0];
 
   // VALIDAMOS EL SLUG
-  return NextResponse.next();
-  // const slugResponse = await SlugMiddleware(subdomain);
-  // if (slugResponse) return slugResponse;
+  // return NextResponse.next();
+  const slugResponse = await SlugMiddleware(subdomain);
+  if (slugResponse) return slugResponse;
 
-  // const authResponse = await AuthMiddleware(subdomain, req);
-  // if (authResponse) return authResponse;
+  const authResponse = await AuthMiddleware(subdomain, req);
+  if (authResponse) return authResponse;
 
-  // const tenantResponse = await TenantMiddleware(subdomain, req);
-  // if (tenantResponse) return tenantResponse;
+  const tenantResponse = await TenantMiddleware(subdomain, req);
+  if (tenantResponse) return tenantResponse;
 
   return NextResponse.rewrite(new URL(`/${subdomain}${url.pathname}`, req.url));
 

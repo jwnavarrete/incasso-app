@@ -2,7 +2,6 @@ import { NextRequest } from "next/server";
 import { showNext, showSlugLogin, showLoginCompany } from "./functions";
 import {
   allowedAuthPaths,
-  allowedDomains,
   allowedLandingPath,
   allowTenantPaths,
 } from "./constantes";
@@ -22,6 +21,10 @@ export const TenantMiddleware = async (subdomain: string, req: NextRequest) => {
   const active_account_slugs = cookies.get("active_account_slugs")?.value || "";
   const last_login_session = cookies.get("last_login_session")?.value || "";
   // VALIDACIONES
+  
+  const allowedDomainsEnv = process.env.NEXT_PUBLIC_ALLOWED_DOMAINS || "";
+  const allowedDomains = allowedDomainsEnv.split(",");
+
   const isPrincipalDomain = allowedDomains.includes(subdomain);
   const isAllowdAuthPath = allowedAuthPaths.includes(path);
   const isAllowTenantPaths = allowTenantPaths.includes(path);

@@ -64,6 +64,13 @@ const showLandigPage = () => {
 
 const isValidSubdomain = async (subdomain: string): Promise<boolean> => {
   try {
+
+    // SI ES EL SUBDOMINIO DE AUTENTICACIÓN RETORNAMOS TRUE
+    if (subdomain === "auth") return true;
+    // SI ES EL SUBDOMINIO DE LA PÁGINA PRINCIPAL RETORNAMOS TRUEÍ
+    const allowedDomains = process.env.PROD_NEXT_PUBLIC_ALLOWED_DOMAINS?.split(",") || [];
+    if (allowedDomains.includes(subdomain)) return true;
+
     // Lógica para validar subdominio
     const response = await axios.post(
       `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/auth/validate-subdomain`,

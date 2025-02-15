@@ -1,11 +1,5 @@
 const DOMAIN_NAME = process.env.NEXT_PUBLIC_DOMAIN_NAME || "";
 
-const allowedDomains = [
-  "incasso-app.vercel.app",
-  "incasso-app",
-  "incasso-app.vercel",
-];
-
 const allowedLandingPath = ["/"];
 
 const allowedAuthPaths = [
@@ -22,14 +16,8 @@ const allowTenantPaths = [
   "/auth/login_company/email_password",
 ];
 
-// const publicTenantPaths = [
-//   "/auth/redirect",
-//   "/auth/login_company/email_password",
-// ];
-
 export {
   DOMAIN_NAME,
-  allowedDomains,
   allowedAuthPaths,
   allowTenantPaths,
   allowedLandingPath,
