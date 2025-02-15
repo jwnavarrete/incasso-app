@@ -47,8 +47,8 @@ export const TenantMiddleware = async (subdomain: string, req: NextRequest) => {
         return showLoginCompany();
       }
     } else {
-      // SI NO ES UNA RUTA PERMITA EN EL LANDIN PAGE REDIRIGE A LA PAGINA DE LOGIN
-      if (!publicTenantPaths) {
+      // SI NO ES UN DOMINIO PRINCIPAL Y LA RUTA ES SOLO PARA TENANT, REDIRIGE AL LOGIN
+      if (publicTenantPaths) {
         return showLoginCompany();
       }
       // SI ES UNA RUTA PRIVADA REDIRIGE A LA PAGINA DE LOGIN
