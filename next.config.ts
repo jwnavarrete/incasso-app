@@ -4,12 +4,12 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
-        source: "/api/proxy/:path*",
-        destination: "http://localhost:8000/:path*", // Redirigir las solicitudes externas a tu backend
+      source: "/api/proxy/:path*",
+      destination: `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/:path*`, // Redirigir las solicitudes externas a tu backend
       },
       {
-        source: "/api/:path*",
-        destination: "/api/:path*", // Deja que Next.js maneje las solicitudes internas
+      source: "/api/:path*",
+      destination: "/api/:path*", // Deja que Next.js maneje las solicitudes internas
       },
     ];
   },
