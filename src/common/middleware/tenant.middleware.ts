@@ -1,5 +1,10 @@
 import { NextRequest } from "next/server";
-import { showNext, showSlugLogin, showLoginCompany } from "./functions";
+import {
+  showNext,
+  showSlugLogin,
+  showLoginCompany,
+  setActiveSlugLogin,
+} from "./functions";
 import {
   allowedAuthPaths,
   publicTenantPaths,
@@ -21,7 +26,7 @@ export const TenantMiddleware = async (subdomain: string, req: NextRequest) => {
   const active_account_slugs = cookies.get("active_account_slugs")?.value || "";
   const last_login_session = cookies.get("last_login_session")?.value || "";
   // VALIDACIONES
-  
+
   const allowedDomainsEnv = process.env.NEXT_PUBLIC_ALLOWED_DOMAINS || "";
   const allowedDomains = allowedDomainsEnv.split(",");
 
@@ -29,7 +34,7 @@ export const TenantMiddleware = async (subdomain: string, req: NextRequest) => {
   const isAllowdAuthPath = allowedAuthPaths.includes(path);
   const isAllowPublicPath = publicTenantPaths.includes(path);
   const isAllowPrivatePath = privateTenantPaths.includes(path);
-  
+
   // LOS DOMINIOS PRINCIPALES NO TIENES TOKEN DE ACCESO
   if (isPrincipalDomain) {
     // SI ESTA INTENTANDO ACCEDER A UNA RUTA DE AUTH REDIRIGE A LA PAGINA DE LOGIN
@@ -47,7 +52,7 @@ export const TenantMiddleware = async (subdomain: string, req: NextRequest) => {
         return showLoginCompany();
       }
       // SI ES UNA RUTA PRIVADA REDIRIGE A LA PAGINA DE LOGIN
-      if(isAllowPrivatePath){
+      if (isAllowPrivatePath) {
         return showLoginCompany();
       }
     }
@@ -74,9 +79,9 @@ export const TenantMiddleware = async (subdomain: string, req: NextRequest) => {
         return showLoginCompany();
       }
     }
-    // SI LA SESSION ES VALIDA YA NO PUEDE ACCEDER A LAS RUTAS DE AUTENTICACION DEL TENANT
+    // SI YA ESTA AUTENTICADO REDIRIGE A LA PAGINA PRINCIPAL
     if (publicTenantPaths) {
-      return showLoginCompany();
+      return setActiveSlugLogin(subdomain);
     }
   }
 
