@@ -1,15 +1,15 @@
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = { 
+const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
-      source: "/api/proxy/:path*",
-      destination: `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/:path*`, // Redirigir las solicitudes externas a tu backend
+        source: "/api/proxy/:path*",
+        destination: `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/:path*`, // Redirigir las solicitudes externas a tu backend
       },
       {
-      source: "/api/:path*",
-      destination: "/api/:path*", // Deja que Next.js maneje las solicitudes internas
+        source: "/api/:path*",
+        destination: "/api/:path*", // Deja que Next.js maneje las solicitudes internas
       },
     ];
   },
@@ -21,7 +21,7 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: "Access-Control-Allow-Origin",
-            value: "https://*.incassoapp", // Permite los subdominios
+            value: `https://${process.env.NEXT_PUBLIC_DOMAIN_NAME}`, // Permite los subdominios
           },
           {
             key: "Access-Control-Allow-Credentials",
