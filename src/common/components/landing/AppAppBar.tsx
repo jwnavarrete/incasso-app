@@ -105,11 +105,15 @@ export default function AppAppBar() {
               alignItems: "center",
             }}
           >
-            <Link href="/signin" passHref>
+            <Link
+              href={`https://auth.${process.env.NEXT_PUBLIC_DOMAIN_NAME}/auth/login_company`}
+              passHref
+            >
               <Button color="primary" variant="text" size="small">
-                Sign in
+              Sign in
               </Button>
             </Link>
+            
             <Link
               href={`https://auth.${process.env.NEXT_PUBLIC_DOMAIN_NAME}/auth/sign_up_new`}
               passHref
