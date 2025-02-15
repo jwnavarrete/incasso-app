@@ -53,9 +53,16 @@ const showSlugDashboard = (active_account_slugs: string, subdomain: string) => {
   if (active_account_slugs) {
     subdomainRedirect = active_account_slugs;
   }
-  return NextResponse.redirect(
+  const response = NextResponse.redirect(
     new URL(`https://${subdomainRedirect}.${DOMAIN_NAME}`)
   );
+
+  response.cookies.set("active_account_slugs", subdomainRedirect, {
+    path: "/",
+    domain: `${subdomainRedirect}.${DOMAIN_NAME}`,
+  });
+
+  return response;
 };
 
 const showLandigPage = () => {
@@ -64,11 +71,11 @@ const showLandigPage = () => {
 
 const isValidSubdomain = async (subdomain: string): Promise<boolean> => {
   try {
-
     // SI ES EL SUBDOMINIO DE AUTENTICACIÓN RETORNAMOS TRUE
     if (subdomain === "auth") return true;
     // SI ES EL SUBDOMINIO DE LA PÁGINA PRINCIPAL RETORNAMOS TRUEÍ
-    const allowedDomains = process.env.PROD_NEXT_PUBLIC_ALLOWED_DOMAINS?.split(",") || [];
+    const allowedDomains =
+      process.env.PROD_NEXT_PUBLIC_ALLOWED_DOMAINS?.split(",") || [];
     if (allowedDomains.includes(subdomain)) return true;
 
     // Lógica para validar subdominio

@@ -4,6 +4,7 @@ import {
   showSlugLogin,
   showLoginCompany,
   setActiveSlugLogin,
+  showSlugDashboard,
 } from "./functions";
 import {
   allowedAuthPaths,
@@ -81,7 +82,7 @@ export const TenantMiddleware = async (subdomain: string, req: NextRequest) => {
     }
     // SI YA ESTA AUTENTICADO REDIRIGE A LA PAGINA PRINCIPAL
     if (publicTenantPaths) {
-      return setActiveSlugLogin(subdomain);
+      return showSlugDashboard(active_account_slugs, subdomain);
     }
   }
 
