@@ -1,7 +1,6 @@
 const DOMAIN_NAME = process.env.NEXT_PUBLIC_DOMAIN_NAME || "";
 
-const allowedLandingPath = ["/"];
-
+// SOLO SE PUEDEN ACCEDER DESDE EL DOMINIO AUTH, NO SE NECESITA TOKEN DE ACCESO
 const allowedAuthPaths = [
   "/auth/login_company",
   "/auth/slug_not_found",
@@ -10,15 +9,18 @@ const allowedAuthPaths = [
   "/auth/login_company/enter_slug",
 ];
 
-const allowTenantPaths = [
+// SE PUEDEN ACCEDER SIN TOKEN DE ACCESO, SOLO PARA TENANT
+const publicTenantPaths = [
   "/auth/redirect",
-  // "/auth/magic_link_login",
   "/auth/login_company/email_password",
 ];
+
+// SE DEBEN ACCEDER CON TOKEN DE ACCESO, SOLO PARA TENANT
+const privateTenantPaths = ["/auth/magic_link_login"];
 
 export {
   DOMAIN_NAME,
   allowedAuthPaths,
-  allowTenantPaths,
-  allowedLandingPath,
+  publicTenantPaths,
+  privateTenantPaths,
 };

@@ -2,8 +2,8 @@ import { NextRequest } from "next/server";
 import { showNext, showSlugLogin, showLoginCompany } from "./functions";
 import {
   allowedAuthPaths,
-  allowedLandingPath,
-  allowTenantPaths,
+  publicTenantPaths,
+  privateTenantPaths,
 } from "./constantes";
 import { isAccessTokenValid } from "../lib/session";
 
@@ -27,9 +27,9 @@ export const TenantMiddleware = async (subdomain: string, req: NextRequest) => {
 
   const isPrincipalDomain = allowedDomains.includes(subdomain);
   const isAllowdAuthPath = allowedAuthPaths.includes(path);
-  const isAllowTenantPaths = allowTenantPaths.includes(path);
-  const isAllowLandinPath = allowedLandingPath.includes(path);
-
+  const isAllowPublicPath = publicTenantPaths.includes(path);
+  const isAllowPrivatePath = privateTenantPaths.includes(path);
+  
   // LOS DOMINIOS PRINCIPALES NO TIENES TOKEN DE ACCESO
   if (isPrincipalDomain) {
     // SI ESTA INTENTANDO ACCEDER A UNA RUTA DE AUTH REDIRIGE A LA PAGINA DE LOGIN
@@ -43,7 +43,11 @@ export const TenantMiddleware = async (subdomain: string, req: NextRequest) => {
       }
     } else {
       // SI NO ES UNA RUTA PERMITA EN EL LANDIN PAGE REDIRIGE A LA PAGINA DE LOGIN
-      if (!isAllowLandinPath) {
+      if (!publicTenantPaths) {
+        return showLoginCompany();
+      }
+      // SI ES UNA RUTA PRIVADA REDIRIGE A LA PAGINA DE LOGIN
+      if(isAllowPrivatePath){
         return showLoginCompany();
       }
     }
@@ -54,7 +58,7 @@ export const TenantMiddleware = async (subdomain: string, req: NextRequest) => {
   // SI NO HAY TOKEN DE REFRESCO
   if (!refreshToken) {
     // SI NO ES UNA RUTA PERMITIDA REDIRIGE A LA PAGINA DE LOGIN
-    if (!isAllowTenantPaths) {
+    if (!isAllowPublicPath) {
       return showSlugLogin(active_account_slugs, subdomain);
     }
   }
@@ -71,7 +75,7 @@ export const TenantMiddleware = async (subdomain: string, req: NextRequest) => {
       }
     }
     // SI LA SESSION ES VALIDA YA NO PUEDE ACCEDER A LAS RUTAS DE AUTENTICACION DEL TENANT
-    if (isAllowTenantPaths) {
+    if (publicTenantPaths) {
       return showLoginCompany();
     }
   }
