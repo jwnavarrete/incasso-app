@@ -18,7 +18,7 @@ export const TenantMiddleware = async (subdomain: string, req: NextRequest) => {
   if (subdomain === "auth") {
     return null;
   }
-
+  
   const cookies = req.cookies;
   const url = new URL(req.url);
   const path = url.pathname;
@@ -81,8 +81,8 @@ export const TenantMiddleware = async (subdomain: string, req: NextRequest) => {
       }
     }
     // SI YA ESTA AUTENTICADO REDIRIGE A LA PAGINA PRINCIPAL
-    if (publicTenantPaths) {
-      return showSlugDashboard(active_account_slugs, subdomain);
+    if (isAllowPublicPath) {
+      return setActiveSlugLogin(subdomain);
     }
   }
 
