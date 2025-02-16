@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { signUpSchema } from "@/modules/auth/validations/signup.schema";
+import { signUpSchema } from "@/modules/auth/validations/signUp.schema";
 import { useForm, FormProvider } from "react-hook-form";
 import InputHookForm from "@/common/components/ui/InputHookForm";
 import { useAuthContext } from "@/modules/auth/context/authContext";
