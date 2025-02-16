@@ -6,6 +6,8 @@ import axios from "axios";
 import { ErrorHandler } from "@/common/lib/errors";
 import store, { setUser } from "@/common/store/global.store";
 import { getUserInfo, setUserInfo } from "@/common/lib/userInfo";
+import { iTokens } from "../../interfaces/auth.interface";
+import { setAuthSession } from "@/common/lib/session";
 
 const MagicLinkLogin = () => {
   const { redirectToLoginCompany, redirectTo } = useClientRouter();
@@ -22,20 +24,39 @@ const MagicLinkLogin = () => {
       const dl_userid = urlParams.get("dl_userid");
       const dl_slug = urlParams.get("dl_slug");
 
-      if (token && dl_userid && dl_slug && path === "email_confirmed") {
-        await axios.post("/api/proxy/auth/verify-email/", {
-          token,
-        });
+      if (path === "email_confirmed") {
+        if (token && dl_userid && dl_slug) {
+          await axios.post("/api/proxy/auth/verify-email/", {
+            token,
+          });
 
-        const userInfo = getUserInfo();
-        if (userInfo) {
-          setUserInfo({ ...userInfo, emailVerified: true });
-          store.dispatch(setUser({ ...userInfo, emailVerified: true }));
+          const userInfo = getUserInfo();
+          if (userInfo) {
+            setUserInfo({ ...userInfo, emailVerified: true });
+            store.dispatch(setUser({ ...userInfo, emailVerified: true }));
 
-          redirectTo("/");
+            redirectTo("/");
+          }
+        } else {
+          throw new Error("Invalid parameters");
         }
-      } else {
-        throw new Error("Invalid parameters");
+      }
+
+      if (path === "recovery_url") {
+        if (token && dl_userid && dl_slug) {
+          const response = await axios.post(
+            "/api/proxy/auth/verify-recovery-token/",
+            {
+              token,
+            }
+          );
+
+          const tokens: iTokens = response.data;
+          setAuthSession(tokens);
+          redirectTo("/");
+        } else {
+          throw new Error("Invalid parameters");
+        }
       }
     } catch (error) {
       ErrorHandler.showErrorWithCallback(error, () => {

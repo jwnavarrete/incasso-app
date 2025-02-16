@@ -10,7 +10,7 @@ import {
   Divider,
   InputAdornment,
 } from "@mui/material";
-import StartIcon from "@mui/icons-material/Start";
+import { GrLinkNext } from "react-icons/gr";
 import useClientRouter from "@/common/hooks/useNavigations";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -116,7 +116,8 @@ const EnterSlug: React.FC = () => {
                     loading={loading}
                     variant="contained"
                     loadingPosition="start"
-                    endIcon={<StartIcon />}
+                    endIcon={<GrLinkNext />}
+                    style={{ textDecoration: "none", textTransform: "none" }}
                     fullWidth
                   >
                     Next

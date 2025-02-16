@@ -22,6 +22,7 @@ import { setAuthSession } from "@/common/lib/session";
 import useClientRouter from "@/common/hooks/useNavigations";
 import LogoComponent from "@/common/components/ui/LogoComponent";
 import ColorMode from "@/theme/ColorModeSelector";
+import Link from "next/link";
 
 const EmailPasswordComponent: React.FC = () => {
   const router = useRouter();
@@ -121,7 +122,12 @@ const EmailPasswordComponent: React.FC = () => {
             </Grid>
             <Grid container>
               <Grid item xs>
-                <Button href="#" variant="text">
+                <Button
+                  component={Link}
+                  href="forgot_password"
+                  variant="text"
+                  style={{ textDecoration: "none", textTransform: "none" }}
+                >
                   Forgot your password?
                 </Button>
               </Grid>
@@ -154,11 +160,14 @@ const EmailPasswordComponent: React.FC = () => {
       </Box>
 
       <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
-        <Button variant="text" onClick={hanleLoginAnotherAccount}>
+        <Button
+          variant="text"
+          onClick={hanleLoginAnotherAccount}
+          style={{ textDecoration: "none", textTransform: "none" }}
+        >
           Login to another account
         </Button>
       </Box>
-      
     </Container>
   );
 };

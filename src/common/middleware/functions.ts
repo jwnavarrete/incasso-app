@@ -16,6 +16,7 @@ const setActiveSlugLogin = (subdomain: string) => {
 const showNext = () => {
   return NextResponse.next();
 };
+
 const showLoginCompany = () => {
   return NextResponse.redirect(
     new URL(`https://auth.${DOMAIN_NAME}/auth/login_company`)
@@ -69,6 +70,20 @@ const showLandigPage = () => {
   return NextResponse.redirect(new URL(`https://${DOMAIN_NAME}`));
 };
 
+const showResetPassword = (reset_password_token: string, subdomain: string) => {
+  return NextResponse.redirect(
+    new URL(
+      `https://${subdomain}.${DOMAIN_NAME}/users/password/edit?reset_password_token=${reset_password_token}`
+    )
+  );
+};
+
+const showErrorPage = () => {
+  return NextResponse.redirect(
+    new URL(`https://${DOMAIN_NAME}`)
+  );
+};
+
 const isValidSubdomain = async (subdomain: string): Promise<boolean> => {
   try {
     // SI ES EL SUBDOMINIO DE AUTENTICACIÓN RETORNAMOS TRUE
@@ -101,4 +116,6 @@ export {
   showLandigPage,
   isValidSubdomain,
   showNext,
+  showResetPassword,
+  showErrorPage,
 };

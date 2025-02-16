@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { signUpSchema } from "@/modules/auth/validations/signUp.schema";
+import { signUpSchema } from "@/modules/auth/validations/signup.schema";
 import { useForm, FormProvider } from "react-hook-form";
 import InputHookForm from "@/common/components/ui/InputHookForm";
 import { useAuthContext } from "@/modules/auth/context/authContext";
@@ -58,8 +58,21 @@ export default function AccountInfoCard() {
               <Grid item xs={12}>
                 <InputHookForm name="email" required label="Email" />
               </Grid>
-              <Grid item xs={12}>
-                <InputHookForm name="password" required label="Password" />
+              <Grid item xs={12} md={6}>
+                <InputHookForm
+                  name="password"
+                  type="password"
+                  required
+                  label="Password"
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <InputHookForm
+                  name="confirmPassword"
+                  type="password"
+                  required
+                  label="Confirm Password"
+                />
               </Grid>
               <Grid item xs={12}>
                 <InputHookForm name="phone" required label="Phone Number" />

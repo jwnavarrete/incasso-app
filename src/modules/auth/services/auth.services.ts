@@ -46,7 +46,18 @@ class AuthService {
 
       return response.data;
     } catch (error) {
-      console.error("Error validating slug:", error);
+      throw error;
+    }
+  }
+
+  async sendRecoveryUrl(email: string): Promise<string> {
+    try {
+      const response = await axios.post("/api/proxy/auth/send-recovery-url", {
+        email,
+      });
+
+      return response.data.message;
+    } catch (error) {
       throw error;
     }
   }

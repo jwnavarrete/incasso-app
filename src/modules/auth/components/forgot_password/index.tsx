@@ -9,7 +9,8 @@ import {
   Box,
   Divider,
 } from "@mui/material";
-import StartIcon from "@mui/icons-material/Start";
+import { GrLinkNext } from "react-icons/gr";
+
 import Image from "next/image";
 import useClientRouter from "@/common/hooks/useNavigations";
 import { FormProvider, useForm } from "react-hook-form";
@@ -18,10 +19,12 @@ import { emailSchema } from "@/modules/auth/validations/auth.schema";
 import InputHookForm from "@/common/components/ui/InputHookForm";
 import { useAuthContext } from "@/modules/auth/context/authContext";
 import { ErrorHandler } from "@/common/lib/errors";
-import { notifyInfo, notifyWarning } from "@/common/lib/notifications";
+import { notifyInfo } from "@/common/lib/notifications";
+import axios from "axios";
 
-const AccountUrl: React.FC = () => {
-  const { sendRecoveryUrl, loading } = useAuthContext();
+const ForgotPassword: React.FC = () => {
+  const { loading } = useAuthContext();
+  const [subdomain, setSubdomain] = React.useState<string | null>(null);
 
   const { redirectToLoginCompany } = useClientRouter();
 
@@ -31,17 +34,33 @@ const AccountUrl: React.FC = () => {
 
   const { handleSubmit } = methods;
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    setSubdomain(getSubdomain());
+  }, []);
+
+  const getSubdomain = () => {
+    if (typeof window !== "undefined") {
+      const hostname = window.location.hostname;
+      const subdomain = hostname.split(".")[0];
+      return subdomain;
+    }
+    return null;
+  };
 
   const handleAuth = async (data: any) => {
     try {
-      const message = await sendRecoveryUrl(data.email);
+      const param = {
+        email: data.email,
+        slug: subdomain,
+      };
 
-      if (message) {
-        notifyInfo(message);
-      } else {
-        notifyWarning("Account does not exist");
-      }
+      const response = await axios.post(
+        "/api/proxy/reset-password/send-email",
+        param
+      );
+
+      const { message } = response.data;
+      notifyInfo(message);
     } catch (error) {
       ErrorHandler.showError(error, true);
     }
@@ -67,15 +86,15 @@ const AccountUrl: React.FC = () => {
 
         <Box display="flex" alignItems="center">
           <Typography component="h3" variant="h3" fontWeight="bold" mr={1}>
-            Get
+            Forgot
           </Typography>
           <Typography component="h3" variant="h3">
-            My Account URL
+            your password?
           </Typography>
         </Box>
 
         <Typography component="h5" variant="body2" mt={2}>
-          Enter your email and we'll send you your account URL.
+          We'll email you instructions on how to reset your password.
         </Typography>
 
         <FormProvider {...methods}>
@@ -102,10 +121,11 @@ const AccountUrl: React.FC = () => {
                   loading={loading}
                   variant="contained"
                   loadingPosition="start"
-                  endIcon={<StartIcon />}
+                  endIcon={<GrLinkNext />}
+                  style={{ textDecoration: "none", textTransform: "none" }}
                   fullWidth
                 >
-                  Send
+                  Reset Password
                 </Button>
               </Grid>
             </Grid>
@@ -130,4 +150,4 @@ const AccountUrl: React.FC = () => {
   );
 };
 
-export default AccountUrl;
+export default ForgotPassword;

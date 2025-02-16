@@ -4,7 +4,7 @@ import { TenantMiddleware } from "./common/middleware/tenant.middleware";
 
 export const config = {
   matcher: [
-    "/((?!api/|_next/|static/|_vercel|[\\w-]+\\.\\w+).*)", // Excluye /static/
+    "/((?!api/|_next/|static/|_vercel|[\\w-]+\\.\\w+).*)",
   ],
 };
 
@@ -13,8 +13,6 @@ export default async function middleware(req: NextRequest) {
   const hostname = req.headers.get("host") || "";
   const subdomain = hostname.split(".")[0];
 
-  // VALIDAMOS EL SLUG
-  // return NextResponse.next();
   console.log("subdomain", subdomain);
 
   const slugResponse = await SlugMiddleware(subdomain);

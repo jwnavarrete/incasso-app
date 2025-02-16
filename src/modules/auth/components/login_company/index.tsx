@@ -9,7 +9,7 @@ import {
   Box,
   Divider,
 } from "@mui/material";
-import StartIcon from "@mui/icons-material/Start";
+import { GrLinkNext } from "react-icons/gr";
 import useClientRouter from "@/common/hooks/useNavigations";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -96,7 +96,8 @@ const LoginCompany: React.FC = () => {
                     fullWidth
                     variant="contained"
                     sx={{ mt: 2, mb: 1 }}
-                    endIcon={<StartIcon />}
+                    endIcon={<GrLinkNext />}
+                    style={{ textDecoration: "none", textTransform: "none" }}
                   >
                     Next
                   </Button>

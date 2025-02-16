@@ -13,14 +13,12 @@ const allowedAuthPaths = [
 const publicTenantPaths = [
   "/auth/redirect",
   "/auth/login_company/email_password",
+  "/auth/login_company/forgot_password",
+  "/auth/magic_link_login",
+  "/auth/change-password",
 ];
 
 // SE DEBEN ACCEDER CON TOKEN DE ACCESO, SOLO PARA TENANT
-const privateTenantPaths = ["/auth/magic_link_login"];
+const privateTenantPaths = [""];
 
-export {
-  DOMAIN_NAME,
-  allowedAuthPaths,
-  publicTenantPaths,
-  privateTenantPaths,
-};
+export { DOMAIN_NAME, allowedAuthPaths, publicTenantPaths, privateTenantPaths };

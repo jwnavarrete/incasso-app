@@ -14,4 +14,18 @@ const slugCompanySchema = yup.object().shape({
     .required("Slug is required"),
 });
 
-export { emailSchema, slugCompanySchema };
+
+const resetPasswordSchema = yup.object().shape({
+  password: yup
+    .string()
+    .required("Password is required")
+    .min(8, "Password must be at least 8 characters long")
+    .matches(/^\S.*\S$/, "Password cannot start or end with a space"),
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref('password'), undefined], 'Passwords must match')
+    .required('Confirm password is required')
+    .matches(/^\S.*\S$/, "Confirm password cannot start or end with a space"),
+});
+
+export { emailSchema, slugCompanySchema, resetPasswordSchema };

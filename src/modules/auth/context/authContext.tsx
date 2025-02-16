@@ -13,7 +13,6 @@ import {
   IUser,
 } from "@/modules/auth/interfaces/singup.interface";
 import AuthService from "../services/auth.services";
-import { updateAccountSlugs } from "../services/functions";
 import {
   iSignIn,
   iTokens,
@@ -31,6 +30,7 @@ interface AuthContextProps {
   updateCompanySignUpData: (companyData: Partial<ICompany>) => void;
   validateSlug: (slug: string) => Promise<iValidateSlugResponse>;
   signUp: () => Promise<iTokens>;
+  sendRecoveryUrl: (email: string) => Promise<string>;
   loading: boolean;
 }
 
@@ -71,6 +71,24 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     try {
       setLoading(true);
       const response = await authService.signIn(data);
+
+      if (!response) {
+        throw new Error("SignIn failed, response is null");
+      }
+
+      return response;
+    } catch (error) {
+      ErrorHandler.handle(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const sendRecoveryUrl = async (email: string): Promise<string> => {
+    const authService = new AuthService();
+    try {
+      setLoading(true);
+      const response = await authService.sendRecoveryUrl(email);
 
       if (!response) {
         throw new Error("SignIn failed, response is null");
@@ -132,6 +150,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       updateCompanySignUpData,
       signUp,
       validateSlug,
+      sendRecoveryUrl,
     }),
     [step, signUpData, loading]
   );

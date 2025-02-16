@@ -9,7 +9,7 @@ const CardContainer: React.FC<CardContainerProps> = ({ children }) => {
   return (
     <Box
       sx={{
-        p: 2,
+        p: 2,    
         maxWidth: "500px",
         display: "flex",
         flexDirection: "column",
