@@ -139,10 +139,10 @@ export const colorSchemes = {
         contrastText: brand[50],
       },
       secondary: {
-        light: secondary[100],
-        main: secondary[300],
+        light: secondary[200],
+        main: secondary[700],
         dark: secondary[600],
-        contrastText: secondary[50],
+        contrastText: secondary[200],
       },
       info: {
         contrastText: brand[300],

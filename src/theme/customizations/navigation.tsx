@@ -25,6 +25,16 @@ export const navigationCustomizations: Components<Theme> = {
             backgroundColor: alpha(theme.palette.action.selected, 0.3),
           },
         },
+        '&:hover': {
+          backgroundColor: gray[200],
+          color: theme.palette.text.primary,
+        },
+        ...theme.applyStyles('dark', {
+          '&:hover': {
+            backgroundColor: gray[700],
+            color: theme.palette.text.secondary,
+          },
+        }),
       }),
     },
   },
@@ -196,7 +206,7 @@ export const navigationCustomizations: Components<Theme> = {
         borderColor: 'transparent',
         ':hover': {
           color: theme.palette.text.primary,
-          backgroundColor: gray[100],
+          backgroundColor: brand[100],
           borderColor: gray[200],
         },
         [`&.${tabClasses.selected}`]: {
@@ -205,6 +215,7 @@ export const navigationCustomizations: Components<Theme> = {
         ...theme.applyStyles('dark', {
           ':hover': {
             color: theme.palette.text.primary,
+            backgroundColor: brand[900],
             borderColor: gray[700],
           },
           [`&.${tabClasses.selected}`]: {

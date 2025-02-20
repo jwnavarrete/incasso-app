@@ -18,7 +18,7 @@ export const dataDisplayCustomizations: Components<Theme> = {
         gap: 0,
       },
     },
-  },
+  },  
   MuiListItem: {
     styleOverrides: {
       root: ({ theme }) => ({
@@ -198,6 +198,7 @@ export const dataDisplayCustomizations: Components<Theme> = {
       }),
     },
   },
+
   MuiTablePagination: {
     styleOverrides: {
       actions: {
