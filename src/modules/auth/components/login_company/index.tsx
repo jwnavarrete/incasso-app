@@ -20,9 +20,13 @@ import axios from "axios";
 import { ErrorHandler } from "@/common/lib/errors";
 import { notifyWarning } from "@/common/lib/notifications";
 import LogoComponent from "@/common/components/ui/LogoComponent";
+import useTranslation from "@/common/hooks/useTranslation";
+import LoadingUI from "@/common/components/ui/LoadingUI";
 
 const LoginCompany: React.FC = () => {
   const { redirectToSignUp, redirectTo } = useClientRouter();
+  const { t } = useTranslation("auth");
+  const [client, setClient] = React.useState(false);
 
   const methods = useForm({
     resolver: yupResolver(emailSchema),
@@ -30,7 +34,13 @@ const LoginCompany: React.FC = () => {
 
   const { handleSubmit } = methods;
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    setClient(true);
+  }, []);
+
+  if (!client) {
+    return <LoadingUI />;
+  }
 
   const handleAuth = async (data: any) => {
     // validamos el email y si es correcto redirigimos a la siguiente pantalla
@@ -45,7 +55,7 @@ const LoginCompany: React.FC = () => {
       }
     } catch (error) {
       console.log(error);
-      ErrorHandler.showError("Invalid email or password", true);
+      ErrorHandler.showError(error, true);
     }
   };
 
@@ -63,15 +73,9 @@ const LoginCompany: React.FC = () => {
         >
           <LogoComponent />
 
-          {/* <Image
-          src={process.env.NEXT_PUBLIC_LOGO_URL || ""}
-          alt={"Logo"}
-          width={120}
-          height={70}
-        /> */}
-
           <Typography component="h2" variant="h4">
-            Log in to your account
+            {/* Log in to your account */}
+            {t("login_company.title")}
           </Typography>
 
           <FormProvider {...methods}>
@@ -86,7 +90,7 @@ const LoginCompany: React.FC = () => {
                   <InputHookForm
                     name="email"
                     required
-                    label="Enter your work email"
+                    label={t("login_company.email")}
                   />
                 </Grid>
 
@@ -99,7 +103,7 @@ const LoginCompany: React.FC = () => {
                     endIcon={<GrLinkNext />}
                     style={{ textDecoration: "none", textTransform: "none" }}
                   >
-                    Next
+                    {t("next_button")}
                   </Button>
                 </Grid>
               </Grid>
@@ -112,9 +116,9 @@ const LoginCompany: React.FC = () => {
         </Box>
 
         <Typography variant="body2" align="center" sx={{ mt: 2 }}>
-          Don't have an account yet?
+          {t("login_company.no_account")}
           <Button variant="text" onClick={redirectToSignUp}>
-            Sign up
+            {t("register")}
           </Button>
         </Typography>
       </Container>

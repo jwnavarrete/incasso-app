@@ -21,10 +21,14 @@ import { useAuthContext } from "@/modules/auth/context/authContext";
 import { ErrorHandler } from "@/common/lib/errors";
 import { notifyInfo } from "@/common/lib/notifications";
 import axios from "axios";
+import useTranslation from "@/common/hooks/useTranslation";
+import LoadingUI from "@/common/components/ui/LoadingUI";
 
 const ForgotPassword: React.FC = () => {
   const { loading } = useAuthContext();
   const [subdomain, setSubdomain] = React.useState<string | null>(null);
+  const [client, setClient] = React.useState(false);
+  const { t } = useTranslation("auth");
 
   const { redirectToLoginCompany } = useClientRouter();
 
@@ -35,6 +39,7 @@ const ForgotPassword: React.FC = () => {
   const { handleSubmit } = methods;
 
   useEffect(() => {
+    setClient(true);
     setSubdomain(getSubdomain());
   }, []);
 
@@ -49,22 +54,30 @@ const ForgotPassword: React.FC = () => {
 
   const handleAuth = async (data: any) => {
     try {
-      const param = {
-        email: data.email,
-        slug: subdomain,
-      };
+      try {
+        const param = {
+          email: data.email,
+          slug: subdomain,
+        };
 
-      const response = await axios.post(
-        "/api/proxy/reset-password/send-email",
-        param
-      );
+        const response = await axios.post(
+          "/api/proxy/reset-password/send-email",
+          param
+        );
 
-      const { message } = response.data;
-      notifyInfo(message);
+        const { message } = response.data;
+        notifyInfo(message);
+      } catch (error) {
+        ErrorHandler.handle(error);
+      }
     } catch (error) {
       ErrorHandler.showError(error, true);
     }
   };
+
+  if (!client) {
+    return <LoadingUI />;
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -86,15 +99,15 @@ const ForgotPassword: React.FC = () => {
 
         <Box display="flex" alignItems="center">
           <Typography component="h3" variant="h3" fontWeight="bold" mr={1}>
-            Forgot
+            {t("forgot_password_page.title.part1")}
           </Typography>
           <Typography component="h3" variant="h3">
-            your password?
+            {t("forgot_password_page.title.part2")}
           </Typography>
         </Box>
 
         <Typography component="h5" variant="body2" mt={2}>
-          We'll email you instructions on how to reset your password.
+          {t("forgot_password_page.subtitle")}
         </Typography>
 
         <FormProvider {...methods}>
@@ -110,8 +123,8 @@ const ForgotPassword: React.FC = () => {
                   name="email"
                   required
                   fullWidth
-                  placeholder="Your email address here..."
-                  label="Your email address"
+                  placeholder={t("forgot_password_page.email_placeholder")}
+                  label={t("forgot_password_page.email_label")}
                 />
               </Grid>
 
@@ -125,7 +138,7 @@ const ForgotPassword: React.FC = () => {
                   style={{ textDecoration: "none", textTransform: "none" }}
                   fullWidth
                 >
-                  Reset Password
+                  {t("forgot_password_page.reset_password_button")}
                 </Button>
               </Grid>
             </Grid>
@@ -143,7 +156,7 @@ const ForgotPassword: React.FC = () => {
           variant="text"
           sx={{ textTransform: "none" }}
         >
-          Back to login page
+          {t("forgot_password_page.back_to_login")}
         </Button>
       </Grid>
     </Container>

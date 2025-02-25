@@ -7,13 +7,13 @@ import LoadingUI from "@/common/components/ui/LoadingUI";
 
 const SignUpNew: React.FC = () => {
   const { step } = useAuthContext();
-  const [loading, setLoading] = React.useState(true);
+  const [client, setClient] = React.useState(false);
 
   useEffect(() => {
-    setLoading(false);
+    setClient(true);
   }, []);
 
-  if (loading) return <LoadingUI />;
+  if (!client) return <LoadingUI />;
 
   return (
     <>

@@ -19,9 +19,13 @@ import InputHookForm from "@/common/components/ui/InputHookForm";
 import { useAuthContext } from "@/modules/auth/context/authContext";
 import { ErrorHandler } from "@/common/lib/errors";
 import { notifyInfo, notifyWarning } from "@/common/lib/notifications";
+import useTranslation from "@/common/hooks/useTranslation";
+import LoadingUI from "@/common/components/ui/LoadingUI";
 
 const AccountUrl: React.FC = () => {
   const { sendRecoveryUrl, loading } = useAuthContext();
+  const [client, setClient] = React.useState(false);
+  const { t } = useTranslation("auth");
 
   const { redirectToLoginCompany } = useClientRouter();
 
@@ -31,7 +35,9 @@ const AccountUrl: React.FC = () => {
 
   const { handleSubmit } = methods;
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    setClient(true);
+  }, []);
 
   const handleAuth = async (data: any) => {
     try {
@@ -46,6 +52,10 @@ const AccountUrl: React.FC = () => {
       ErrorHandler.showError(error, true);
     }
   };
+
+  if (!client) {
+    return <LoadingUI />;
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -67,15 +77,15 @@ const AccountUrl: React.FC = () => {
 
         <Box display="flex" alignItems="center">
           <Typography component="h3" variant="h3" fontWeight="bold" mr={1}>
-            Get
+            {t("get_account_url.title.part1")}
           </Typography>
           <Typography component="h3" variant="h3">
-            My Account URL
+            {t("get_account_url.title.part2")}
           </Typography>
         </Box>
 
         <Typography component="h5" variant="body2" mt={2}>
-          Enter your email and we'll send you your account URL.
+          {t("get_account_url.subtitle")}
         </Typography>
 
         <FormProvider {...methods}>
@@ -91,8 +101,8 @@ const AccountUrl: React.FC = () => {
                   name="email"
                   required
                   fullWidth
-                  placeholder="Your email address here..."
-                  label="Your email address"
+                  placeholder={t("get_account_url.email_placeholder")}
+                  label={t("get_account_url.email")}
                 />
               </Grid>
 
@@ -105,7 +115,7 @@ const AccountUrl: React.FC = () => {
                   endIcon={<StartIcon />}
                   fullWidth
                 >
-                  Send
+                  {t("send_button")}
                 </Button>
               </Grid>
             </Grid>
@@ -123,7 +133,7 @@ const AccountUrl: React.FC = () => {
           variant="text"
           sx={{ textTransform: "none" }}
         >
-          Back to login page
+          {t("get_account_url.back_to_login")}
         </Button>
       </Grid>
     </Container>

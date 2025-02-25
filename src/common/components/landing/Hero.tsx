@@ -11,6 +11,7 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import visuallyHidden from "@mui/utils/visuallyHidden";
 import { styled } from "@mui/material/styles";
+import useTranslation from "@/common/hooks/useTranslation";
 
 const StyledBox = styled("div")(({ theme }) => ({
   alignSelf: "center",
@@ -43,6 +44,7 @@ const StyledBox = styled("div")(({ theme }) => ({
 
 export default function Hero() {
   const handleStartNow = async () => {};
+  const { t } = useTranslation();
 
   return (
     <Box
@@ -82,7 +84,8 @@ export default function Hero() {
               fontSize: "clamp(3rem, 10vw, 3.5rem)",
             }}
           >
-            Our&nbsp;latest&nbsp;
+            {/* Our&nbsp;latest&nbsp; */}
+            {t("LandingPage.Hero.title.part1")}
             <Typography
               component="span"
               variant="h1"
@@ -92,9 +95,10 @@ export default function Hero() {
                 ...theme.applyStyles("dark", {
                   color: "primary.light",
                 }),
+                ml: { xs: 0, sm: 1 },
               })}
             >
-              products
+              {t("LandingPage.Hero.title.part2")}
             </Typography>
           </Typography>
 
@@ -105,11 +109,9 @@ export default function Hero() {
               width: { sm: "100%", md: "80%" },
             }}
           >
-            Explore our cutting-edge dashboard, delivering high-quality
-            solutions tailored to your needs. Elevate your experience with
-            top-tier features and services.
+            {t("LandingPage.Hero.description")}
           </Typography>
-          <Stack
+          {/* <Stack
             direction={{ xs: "column", sm: "row" }}
             spacing={1}
             useFlexGap
@@ -153,7 +155,7 @@ export default function Hero() {
               Terms & Conditions
             </Link>
             .
-          </Typography>
+          </Typography> */}
         </Stack>
         <StyledBox id="image" />
       </Container>

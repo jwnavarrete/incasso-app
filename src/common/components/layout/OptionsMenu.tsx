@@ -14,6 +14,7 @@ import MoreVertRoundedIcon from "@mui/icons-material/MoreVertRounded";
 import MenuButton from "./MenuButton";
 import { clearClientSession } from "@/common/lib/session";
 import useClientRouter from "@/common/hooks/useNavigations";
+import { useTranslation } from "react-i18next";
 
 const MenuItem = styled(MuiMenuItem)({
   margin: "2px 0",
@@ -21,6 +22,8 @@ const MenuItem = styled(MuiMenuItem)({
 
 export default function OptionsMenu() {
   const { redirectToLoginCompany } = useClientRouter();
+  const { t, i18n } = useTranslation();
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -65,11 +68,10 @@ export default function OptionsMenu() {
           },
         }}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
+        <MenuItem onClick={handleClose}>{t("profile.title")}</MenuItem>
+        <MenuItem onClick={handleClose}>{t("my_account.title")}</MenuItem>
         <Divider />
-        <MenuItem onClick={handleClose}>Add another account</MenuItem>
-        <MenuItem onClick={handleClose}>Settings</MenuItem>
+        <MenuItem onClick={handleClose}>{t("settings.title")}</MenuItem>
         <Divider />
         <MenuItem
           onClick={handleLogout}
@@ -80,7 +82,7 @@ export default function OptionsMenu() {
             },
           }}
         >
-          <ListItemText>Logout</ListItemText>
+          <ListItemText>{t("logout")}</ListItemText>
           <ListItemIcon>
             <LogoutRoundedIcon fontSize="small" />
           </ListItemIcon>

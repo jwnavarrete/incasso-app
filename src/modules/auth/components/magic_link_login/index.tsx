@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Box, CircularProgress, Typography } from "@mui/material";
 import useClientRouter from "@/common/hooks/useNavigations";
 import axios from "axios";
@@ -8,12 +8,15 @@ import store, { setUser } from "@/common/store/global.store";
 import { getUserInfo, setUserInfo } from "@/common/lib/userInfo";
 import { iTokens } from "../../interfaces/auth.interface";
 import { setAuthSession } from "@/common/lib/session";
+import LoadingUI from "@/common/components/ui/LoadingUI";
 
 const MagicLinkLogin = () => {
   const { redirectToLoginCompany, redirectTo } = useClientRouter();
+  const [client, setClient] = useState(false);
 
   useEffect(() => {
     handleMagicLinkLogin();
+    setClient(true);
   }, []);
 
   const handleMagicLinkLogin = async () => {
@@ -64,6 +67,10 @@ const MagicLinkLogin = () => {
       });
     }
   };
+
+  if (!client) {
+    return <LoadingUI />;
+  }
 
   return (
     <Box

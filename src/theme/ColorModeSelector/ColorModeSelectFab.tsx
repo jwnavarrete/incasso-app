@@ -8,7 +8,7 @@ import Fab from "@mui/material/Fab";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { useColorScheme } from "@mui/material/styles";
-import IconButton, { IconButtonOwnProps } from "@mui/material/IconButton";
+import { IconButtonOwnProps } from "@mui/material/IconButton";
 
 export default function ColorModeSelectFab(props: IconButtonOwnProps) {
   const { mode, systemMode, setMode } = useColorScheme();
@@ -33,7 +33,7 @@ export default function ColorModeSelectFab(props: IconButtonOwnProps) {
     handleClose();
   };
 
-  if(loading){
+  if (loading) {
     return null;
   }
 

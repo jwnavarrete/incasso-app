@@ -1,0 +1,49 @@
+{
+    "home": {
+        "title": "Bienvenido a Incasso App",
+        "subtitle": "Su solución integral para gestionar sus finanzas."
+    },
+    "profile": {
+        "title": "Perfil"
+    },
+    "my_account": {
+        "title": "Mi cuenta"
+    },
+    "settings": {
+        "title": "Configuración"
+    },
+    "logout": "Cerrar sesión",
+    "LandingPage": {
+        "Hero": {
+            "title": {
+                "part1": "Nuestros últimos",
+                "part2": "productos"
+            },
+            "description": "Explore nuestro avanzado panel de control, que ofrece soluciones de alta calidad adaptadas a sus necesidades. Mejore su experiencia con funciones y servicios de primera clase."
+        },
+        "auth": {
+            "login": "Iniciar sesión",
+            "register": "Registrarse"
+        }
+    },
+    "auth": {
+        "sign_up": "Regístrate",
+        "next": "Siguiente",
+        "login_company": {
+            "title": "Inicia sesión en tu cuenta",
+            "email": "Introduce tu correo de trabajo",
+            "no_account": "¿No tienes una cuenta aún?"
+        },
+        "already_signed_in": "Ya has iniciado sesión en estas cuentas:",
+        "enter_slug": {
+            "title": {
+                "bold": "Iniciar",
+                "normal": "sesión"
+            },
+            "subtitle": "Introduce la dirección web de tu cuenta",
+            "enter_slug": "Introduce tu slug",
+            "forgot_address": "¿Olvidaste la dirección web de tu cuenta?",
+            "no_account_yet": "¿No tienes una cuenta aún?"
+        }
+    }
+}

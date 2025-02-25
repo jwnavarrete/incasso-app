@@ -1,0 +1,40 @@
+{
+    "inicio": "Home",
+    "facturas": {
+        "title": "Invoices",
+        "importarFacturasMasivas": "Import bulk invoices",
+        "importarFacturaIndividual": "Import individual invoice",
+        "consultarFacturas": "Consult invoices"
+    },
+    "Clientes": {
+        "title": "Clients",
+        "listadoClientes": "Client list",
+        "historialFacturacion": "Billing history",
+        "actualizarCliente": "Update client"
+    },
+    "Cobranzas": {
+        "title": "Collections",
+        "cobrosPendientes": "Pending collections",
+        "cobrosRealizados": "Completed collections",
+        "registrarCobro": "Register collection"
+    },
+    "EstadoCuenta": {
+        "title": "Account status",
+        "estadoCuentasPorCliente": "Account status by client",
+        "estadoCuentasGeneral": "General account status"
+    },
+    "Reportes": {
+        "title": "Reports",
+        "reporteCobranzas": "Collections report"
+    },
+    "Configuracion": {
+        "title": "Settings",
+        "parametrosCobranzas": "Collections parameters",
+        "usuarios": "Users",
+        "conexionApi": "API connection"
+    },
+    "Soporte": {
+        "title": "Support",
+        "technicalSupport": "Technical support"
+    }
+}

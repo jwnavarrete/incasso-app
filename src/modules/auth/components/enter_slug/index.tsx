@@ -21,19 +21,28 @@ import { useAuthContext } from "@/modules/auth/context/authContext";
 import { ErrorHandler } from "@/common/lib/errors";
 import { notifyWarning } from "@/common/lib/notifications";
 import LogoComponent from "@/common/components/ui/LogoComponent";
+import useTranslation from "@/common/hooks/useTranslation";
+import LoadingUI from "@/common/components/ui/LoadingUI";
 
 const EnterSlug: React.FC = () => {
   const { validateSlug, loading } = useAuthContext();
-
+  const { t } = useTranslation("auth");
+  const [client, setClient] = React.useState(false);
   const { redirectToSignUp, redirectToSlug, redirectTo } = useClientRouter();
 
   const methods = useForm({
     resolver: yupResolver(slugCompanySchema),
   });
 
-  const { reset, handleSubmit } = methods;
+  const { handleSubmit } = methods;
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    setClient(true);
+  }, []);
+
+  if (!client) {
+    return <LoadingUI />;
+  }
 
   const handleAuth = async (data: any) => {
     try {
@@ -65,15 +74,15 @@ const EnterSlug: React.FC = () => {
 
           <Box display="flex" alignItems="center">
             <Typography component="h3" variant="h3" fontWeight="bold" mr={1}>
-              Log
+              {t("login_company.enter_slug.title.part1")}
             </Typography>
             <Typography component="h3" variant="h3">
-              in
+              {t("login_company.enter_slug.title.part2")}
             </Typography>
           </Box>
 
           <Typography component="h5" variant="body2" mt={2}>
-            Enter your account's web address:
+            {t("login_company.enter_slug.subtitle")}
           </Typography>
 
           <FormProvider {...methods}>
@@ -96,7 +105,7 @@ const EnterSlug: React.FC = () => {
                         </InputAdornment>
                       ),
                     }}
-                    label="Enter your slug"
+                    label={t("login_company.enter_slug.slug_input")}
                   />
                 </Grid>
 
@@ -106,7 +115,7 @@ const EnterSlug: React.FC = () => {
                     variant="text"
                     sx={{ textTransform: "none" }}
                   >
-                    Forgot your account's web address?
+                    {t("login_company.enter_slug.forgot_slug")}
                   </Button>
                 </Grid>
 
@@ -120,7 +129,7 @@ const EnterSlug: React.FC = () => {
                     style={{ textDecoration: "none", textTransform: "none" }}
                     fullWidth
                   >
-                    Next
+                    {t("next_button")}
                   </Button>
                 </Grid>
               </Grid>
@@ -133,9 +142,9 @@ const EnterSlug: React.FC = () => {
         </Box>
 
         <Typography variant="body2" align="center" sx={{ mt: 2 }}>
-          Don't have an account yet?
+          {t("login_company.enter_slug.no_account")}
           <Button variant="text" onClick={redirectToSignUp}>
-            Sign up
+            {t("register")}
           </Button>
         </Typography>
       </Container>

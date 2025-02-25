@@ -14,8 +14,9 @@ import Drawer from "@mui/material/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import ColorModeIconDropdown from "@/theme/ColorModeSelector/ColorModeIconDropdown";
-import Sitemark from "@/common/components/landing/SitemarkIcon";
 import Link from "next/link";
+import useTranslation from "@/common/hooks/useTranslation";
+import LanguageDropdown from "@/theme/ColorModeSelector/LanguageDropdown";
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   display: "flex",
@@ -33,6 +34,7 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 
 export default function AppAppBar() {
   const [open, setOpen] = React.useState(false);
+  const { t } = useTranslation();
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
@@ -54,7 +56,7 @@ export default function AppAppBar() {
           <Box
             sx={{ flexGrow: 1, display: "flex", alignItems: "center", px: 0 }}
           >
-            <Sitemark />
+            {/* <Sitemark />
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
               <Link href="#features" passHref>
                 <Button variant="text" color="info" size="small">
@@ -96,7 +98,7 @@ export default function AppAppBar() {
                   Blog
                 </Button>
               </Link>
-            </Box>
+            </Box> */}
           </Box>
           <Box
             sx={{
@@ -110,21 +112,26 @@ export default function AppAppBar() {
               passHref
             >
               <Button color="primary" variant="text" size="small">
-              Sign in
+                {t("LandingPage.auth.login")}
               </Button>
             </Link>
-            
+
             <Link
               href={`https://auth.${process.env.NEXT_PUBLIC_DOMAIN_NAME}/auth/sign_up_new`}
               passHref
             >
               <Button color="primary" variant="contained" size="small">
-                Sign up
+                {t("LandingPage.auth.register")}
               </Button>
             </Link>
+
+            <LanguageDropdown />
+
             <ColorModeIconDropdown />
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" }, gap: 1 }}>
+            <LanguageDropdown />
+
             <ColorModeIconDropdown size="medium" />
             <IconButton aria-label="Menu button" onClick={toggleDrawer(true)}>
               <MenuIcon />
@@ -151,7 +158,7 @@ export default function AppAppBar() {
                   </IconButton>
                 </Box>
 
-                <Link href="#features" passHref>
+                {/* <Link href="#features" passHref>
                   <MenuItem onClick={toggleDrawer(false)}>Features</MenuItem>
                 </Link>
                 <Link href="#testimonials" passHref>
@@ -170,7 +177,7 @@ export default function AppAppBar() {
                 </Link>
                 <Link href="#blog" passHref>
                   <MenuItem onClick={toggleDrawer(false)}>Blog</MenuItem>
-                </Link>
+                </Link> */}
                 <Divider sx={{ my: 3 }} />
                 <MenuItem>
                   <Link
@@ -184,7 +191,8 @@ export default function AppAppBar() {
                       fullWidth
                       size="small"
                     >
-                      Sign up
+                      {/* Sign up */}
+                      {t("LandingPage.auth.register")}
                     </Button>
                   </Link>
                 </MenuItem>
@@ -200,7 +208,8 @@ export default function AppAppBar() {
                       fullWidth
                       size="small"
                     >
-                      Sign in
+                      {/* Sign in */}
+                      {t("LandingPage.auth.login")}
                     </Button>
                   </Link>
                 </MenuItem>

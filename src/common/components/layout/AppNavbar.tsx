@@ -15,6 +15,7 @@ import MenuButton from "./MenuButton";
 import ColorModeIconDropdown from "@/theme/ColorModeSelector/ColorModeIconDropdown";
 import { useSelector } from "react-redux";
 import { AppState } from "@/common/store/global.store"; // Adjust the import path as necessary
+import LanguageDropdown from "@/theme/ColorModeSelector/LanguageDropdown";
 
 const Toolbar = styled(MuiToolbar)({
   width: "100%",
@@ -76,6 +77,7 @@ export default function AppNavbar() {
               {user?.company}
             </Typography>
           </Stack>
+          <LanguageDropdown />
           <ColorModeIconDropdown />
           <MenuButton aria-label="menu" onClick={toggleDrawer(true)}>
             <MenuRoundedIcon />

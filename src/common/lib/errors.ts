@@ -5,7 +5,9 @@ import { notifyError } from "@/common/lib/notifications";
 export class ErrorHandler {
   static handle(error: unknown): never {
     if (axios.isAxiosError(error) && error.response) {
-      throw new Error(error.response.data.message);
+      throw new Error(
+        error.response.data?.message || "An unexpected error occurred."
+      );
     } else {
       if (error instanceof Error) {
         throw error;

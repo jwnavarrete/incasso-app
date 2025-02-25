@@ -7,7 +7,6 @@ import {
   Grid,
   Box,
   Divider,
-  Fab,
 } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { FormProvider, useForm } from "react-hook-form";
@@ -21,12 +20,17 @@ import { notifySuccess } from "@/common/lib/notifications";
 import { setAuthSession } from "@/common/lib/session";
 import useClientRouter from "@/common/hooks/useNavigations";
 import LogoComponent from "@/common/components/ui/LogoComponent";
-import ColorMode from "@/theme/ColorModeSelector";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
+import LoadingUI from "@/common/components/ui/LoadingUI";
 
 const EmailPasswordComponent: React.FC = () => {
   const router = useRouter();
   const { signIn, loading } = useAuthContext();
+  const { t } = useTranslation("auth");
+  const [client, setClient] = React.useState(false);
+  const [subdomain, setSubdomain] = React.useState<string | null>(null);
+
   const { redirectTo } = useClientRouter();
 
   const methods = useForm({
@@ -34,6 +38,24 @@ const EmailPasswordComponent: React.FC = () => {
   });
 
   const { handleSubmit } = methods;
+
+  const getSubdomain = () => {
+    if (typeof window !== "undefined") {
+      const hostname = window.location.hostname;
+      const subdomain = hostname.split(".")[0];
+      return subdomain;
+    }
+    return null;
+  };
+
+  useEffect(() => {
+    setClient(true);
+    setSubdomain(getSubdomain());
+  }, []);
+
+  if (!client) {
+    return <LoadingUI />;
+  }
 
   const handleAuth = async (data: iSignIn) => {
     try {
@@ -48,32 +70,14 @@ const EmailPasswordComponent: React.FC = () => {
 
       redirectTo("/");
     } catch (error) {
-      console.log(error);
-      ErrorHandler.showError("Invalid email or password", true);
+      ErrorHandler.showError(error, true);
     }
   };
-
-  const [subdomain, setSubdomain] = React.useState<string | null>(null);
-
-  useEffect(() => {
-    // Check if user is already logged in
-    // Redirect to dashboard
-    setSubdomain(getSubdomain());
-  }, []);
 
   const hanleLoginAnotherAccount = () => {
     router.push(
       `https://auth.${process.env.NEXT_PUBLIC_DOMAIN_NAME}/auth/login_company`
     );
-  };
-
-  const getSubdomain = () => {
-    if (typeof window !== "undefined") {
-      const hostname = window.location.hostname;
-      const subdomain = hostname.split(".")[0];
-      return subdomain;
-    }
-    return null;
   };
 
   return (
@@ -88,15 +92,9 @@ const EmailPasswordComponent: React.FC = () => {
         }}
       >
         <LogoComponent />
-        {/* <Image
-          src={process.env.NEXT_PUBLIC_LOGO_URL || ""}
-          alt={"Logo"}
-          width={120}
-          height={70}
-        /> */}
 
         <Typography component="h2" variant="h2">
-          Log In
+          {t("sign_in")}
         </Typography>
         <Typography variant="body2">{subdomain}</Typography>
 
@@ -109,14 +107,14 @@ const EmailPasswordComponent: React.FC = () => {
           <FormProvider {...methods}>
             <Grid container spacing={2} mt={0.5}>
               <Grid item xs={12}>
-                <InputHookForm name="email" required label="Email" />
+                <InputHookForm name="email" required label={t("email")} />
               </Grid>
               <Grid item xs={12}>
                 <InputHookForm
                   name="password"
                   required
                   type="password"
-                  label="Password"
+                  label={t("password")}
                 />
               </Grid>
             </Grid>
@@ -128,7 +126,7 @@ const EmailPasswordComponent: React.FC = () => {
                   variant="text"
                   style={{ textDecoration: "none", textTransform: "none" }}
                 >
-                  Forgot your password?
+                  {t("login_email_password.forgot_password")}
                 </Button>
               </Grid>
             </Grid>
@@ -140,7 +138,7 @@ const EmailPasswordComponent: React.FC = () => {
               loadingPosition="start"
               fullWidth
             >
-              Sign In
+              {t("sign_in")}
             </Button>
           </FormProvider>
         </Box>
@@ -151,10 +149,11 @@ const EmailPasswordComponent: React.FC = () => {
       </Box>
 
       <Typography variant="body2" align="center" sx={{ mt: 2 }}>
-        In order to sign up to <strong>{subdomain}</strong> account, you have to
-        be invited by its admin.
+        {t("login_email_password.invitation_info")} {subdomain}
+        {t("login_email_password.invitation_inf2")}
       </Typography>
 
+      <Box sx={{ width: "100%", mt: 2 }}></Box>
       <Box sx={{ width: "100%", mt: 2 }}>
         <Divider />
       </Box>
@@ -165,7 +164,7 @@ const EmailPasswordComponent: React.FC = () => {
           onClick={hanleLoginAnotherAccount}
           style={{ textDecoration: "none", textTransform: "none" }}
         >
-          Login to another account
+          {t("login_email_password.login_another_account")}
         </Button>
       </Box>
     </Container>

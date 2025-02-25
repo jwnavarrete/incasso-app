@@ -12,16 +12,20 @@ import {
 import HomeIcon from "@mui/icons-material/Home";
 import { useRouter } from "next/navigation";
 import { getClientSessionByCode } from "@/common/lib/session";
+import useTranslation from "@/common/hooks/useTranslation";
+import LoadingUI from "@/common/components/ui/LoadingUI";
 
 const CurrentAccount: React.FC = () => {
   const router = useRouter();
-
   const [accounts, setAccounts] = React.useState<string[]>([]);
+  const { t } = useTranslation();
+  const [client, setClient] = React.useState(false);
 
   useEffect(() => {
     const dapulseAccountSlugs = getClientSessionByCode("dapulseAccountSlugs");
     const sessionAccounts = JSON.parse(dapulseAccountSlugs || "[]");
     setAccounts(sessionAccounts);
+    setClient(true);
   }, []);
 
   const handleAccountClick = (account: string) => {
@@ -30,6 +34,10 @@ const CurrentAccount: React.FC = () => {
 
   if (accounts.length === 0) {
     return null;
+  }
+
+  if (!client) {
+    return <LoadingUI />;
   }
 
   return (
@@ -50,7 +58,7 @@ const CurrentAccount: React.FC = () => {
         }}
       >
         <Typography variant="body1">
-          <span>You're already signed in to these accounts:</span>
+          <span> {t("auth.already_signed_in")}</span>
         </Typography>
 
         <Grid container spacing={2} justifyContent="center" sx={{ mt: 2 }}>

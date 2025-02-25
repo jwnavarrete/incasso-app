@@ -1,0 +1,40 @@
+{
+    "inicio": "Begin",
+    "facturas": {
+        "title": "Facturen",
+        "importarFacturasMasivas": "Massale facturen importeren",
+        "importarFacturaIndividual": "Individuele factuur importeren",
+        "consultarFacturas": "Facturen raadplegen"
+    },
+    "Clientes": {
+        "title": "Klanten",
+        "listadoClientes": "Klantenlijst",
+        "historialFacturacion": "Facturatiegeschiedenis",
+        "actualizarCliente": "Klant bijwerken"
+    },
+    "Cobranzas": {
+        "title": "Incasso's",
+        "cobrosPendientes": "Openstaande incasso's",
+        "cobrosRealizados": "Uitgevoerde incasso's",
+        "registrarCobro": "Incasso registreren"
+    },
+    "EstadoCuenta": {
+        "title": "Rekeningoverzicht",
+        "estadoCuentasPorCliente": "Rekeningoverzicht per klant",
+        "estadoCuentasGeneral": "Algemeen rekeningoverzicht"
+    },
+    "Reportes": {
+        "title": "Rapporten",
+        "reporteCobranzas": "Incasso rapport"
+    },
+    "Configuracion": {
+        "title": "Configuratie",
+        "parametrosCobranzas": "Incasso parameters",
+        "usuarios": "Gebruikers",
+        "conexionApi": "API verbinding"
+    },
+    "Soporte": {
+        "title": "Ondersteuning",
+        "technicalSupport": "Technische ondersteuning"
+    }
+}

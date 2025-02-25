@@ -1,0 +1,40 @@
+{
+    "inicio": "Inicio",
+    "facturas": {
+        "title": "Facturas",
+        "importarFacturasMasivas": "Importar facturas masivas",
+        "importarFacturaIndividual": "Importar factura individual",
+        "consultarFacturas": "Consultar facturas"
+    },
+    "Clientes": {
+        "title": "Clientes",
+        "listadoClientes": "Listado de clientes",
+        "historialFacturacion": "Historial de facturación",
+        "actualizarCliente": "Actualizar cliente"
+    },
+    "Cobranzas": {
+        "title": "Cobranzas",
+        "cobrosPendientes": "Cobros pendientes",
+        "cobrosRealizados": "Cobros realizados",
+        "registrarCobro": "Registrar cobro"
+    },
+    "EstadoCuenta": {
+        "title": "Estado de cuenta",
+        "estadoCuentasPorCliente": "Estado de cuentas por cliente",
+        "estadoCuentasGeneral": "Estado de cuentas general"
+    },
+    "Reportes": {
+        "title": "Reportes",
+        "reporteCobranzas": "Reporte de cobranzas"
+    },
+    "Configuracion": {
+        "title": "Configuración",
+        "parametrosCobranzas": "Parámetros de cobranzas",
+        "usuarios": "Usuarios",
+        "conexionApi": "Conexión API"
+    },
+    "Soporte": {
+        "title": "Soporte",
+        "technicalSupport": "Soporte técnico"
+    }
+}

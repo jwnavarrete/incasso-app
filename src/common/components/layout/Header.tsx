@@ -7,6 +7,7 @@ import CustomDatePicker from "./CustomDatePicker";
 import NavbarBreadcrumbs from "./NavbarBreadcrumbs";
 import MenuButton from "./MenuButton";
 import ColorModeIconDropdown from "@/theme/ColorModeSelector/ColorModeIconDropdown";
+import LanguageDropdown from "@/theme/ColorModeSelector/LanguageDropdown";
 
 export default function Header() {
   return (
@@ -29,7 +30,8 @@ export default function Header() {
         <MenuButton showBadge aria-label="Open notifications">
           <NotificationsRoundedIcon />
         </MenuButton>
-        
+
+        <LanguageDropdown />
         <ColorModeIconDropdown />
       </Stack>
     </Stack>

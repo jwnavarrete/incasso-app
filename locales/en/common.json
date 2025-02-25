@@ -1,0 +1,52 @@
+{
+    "Menu": {
+        "home": "Home"
+    },
+    "profile": {
+        "title": "Profile"
+    },
+    "my_account": {
+        "title": "My Account"
+    },
+    "settings": {
+        "title": "Settings"
+    },
+    "logout": "Log out",
+    "home": {
+        "title": "Welcome to Incasso App",
+        "subtitle": "Your comprehensive solution for managing your finances."
+    },
+    "LandingPage": {
+        "Hero": {
+            "title": {
+                "part1": "Our latest",
+                "part2": "products"
+            },
+            "description": "Explore our advanced dashboard, offering high-quality solutions tailored to your needs. Enhance your experience with top-notch features and services."
+        },
+        "auth": {
+            "login": "Log in",
+            "register": "Sign up"
+        }
+    },
+    "auth": {
+        "sign_up": "Sign up",
+        "next": "Next",
+        "login_company": {
+            "title": "Log in to your account",
+            "email": "Enter your work email",
+            "no_account": "Don't have an account yet?"
+        },
+        "already_signed_in": "You are already signed in to these accounts:",
+        "enter_slug": {
+            "title": {
+                "bold": "Log",
+                "normal": "in"
+            },
+            "subtitle": "Enter your account's web address",
+            "enter_slug": "Enter your slug",
+            "forgot_address": "Forgot your account's web address?",
+            "no_account_yet": "Don't have an account yet?"
+        }
+    }
+}

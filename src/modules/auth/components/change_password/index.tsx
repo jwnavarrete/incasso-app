@@ -6,9 +6,7 @@ import {
   Typography,
   Grid,
   Box,
-  Divider,
 } from "@mui/material";
-import { useRouter } from "next/navigation";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import InputHookForm from "@/common/components/ui/InputHookForm";
@@ -17,10 +15,11 @@ import { notifySuccess } from "@/common/lib/notifications";
 import useClientRouter from "@/common/hooks/useNavigations";
 import axios from "axios";
 import { resetPasswordSchema } from "@/modules/auth/validations/auth.schema";
+import LoadingUI from "@/common/components/ui/LoadingUI";
 
 const ChangePassword: React.FC = () => {
-  const router = useRouter();
   const { redirectTo, redirectToLoginCompany } = useClientRouter();
+  const [client, setClient] = React.useState(false);
 
   const [authParams, setAuthParams] = React.useState<IAuthParams>({
     token: null,
@@ -56,8 +55,7 @@ const ChangePassword: React.FC = () => {
 
       redirectTo("/");
     } catch (error) {
-      console.log(error);
-      ErrorHandler.showError("Invalid email or password", true);
+      ErrorHandler.showError(error, true);
     }
   };
 
@@ -71,6 +69,7 @@ const ChangePassword: React.FC = () => {
     } else {
       redirectToLoginCompany();
     }
+    setClient(true);
   }, []);
 
   const validateResetPasswordToken = async (token: string, userId: string) => {
@@ -102,6 +101,10 @@ const ChangePassword: React.FC = () => {
       );
     }
   };
+
+  if (!client) {
+    return <LoadingUI />;
+  }
 
   return (
     <Container component="main" maxWidth="xs">
