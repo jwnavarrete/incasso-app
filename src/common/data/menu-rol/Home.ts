@@ -8,7 +8,7 @@ const HomeMenu = (t: (key: string) => string) => {
       label: t('inicio'), // Usamos la función de traducción
       Icon: FaHome,
       path: "/",
-      roles: [ROLES.TENANT_ADMIN, ROLES.COLLECTIONS_EXECUTIVE],
+      roles: [ROLES.TENANT_ADMIN, ROLES.COLLECTIONS_EXECUTIVE, ROLES.SUPER_ADMIN],
     },
   ];
 };

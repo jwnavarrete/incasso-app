@@ -1,10 +1,9 @@
 {
     "inicio": "Begin",
-    "facturas": {
-        "title": "Facturen",
-        "importarFacturasMasivas": "Massale facturen importeren",
-        "importarFacturaIndividual": "Individuele factuur importeren",
-        "consultarFacturas": "Facturen raadplegen"
+    "accounts_receivable": {
+        "title": "Te ontvangen rekeningen",
+        "registro": "Registratie",
+        "viewInvoices": "Facturen bekijken"
     },
     "Clientes": {
         "title": "Klanten",
@@ -29,7 +28,7 @@
     },
     "Configuracion": {
         "title": "Configuratie",
-        "parametrosCobranzas": "Incasso parameters",
+        "parametros": "parameters",
         "usuarios": "Gebruikers",
         "conexionApi": "API verbinding"
     },

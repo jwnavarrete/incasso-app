@@ -7,14 +7,14 @@ const configuracionMenu = (t: (key: string) => string) => {
       id: "7",
       label: t('Configuracion.title'), // Usamos la función de traducción
       Icon: FaCog,
-      roles: [ROLES.TENANT_ADMIN],
+      roles: [ROLES.TENANT_ADMIN, ROLES.SUPER_ADMIN],
       children: [
         {
           id: "7.1",
-          label: t('Configuracion.parametrosCobranzas'), // Usamos la función de traducción
+          label: t('Configuracion.parametros'), // Usamos la función de traducción
           Icon: FaSlidersH,
-          path: "/parametros-cobranzas",
-          roles: [ROLES.TENANT_ADMIN],
+          path: "/parameters",
+          roles: [ROLES.TENANT_ADMIN, ROLES.SUPER_ADMIN],
         },
         {
           id: "7.2",

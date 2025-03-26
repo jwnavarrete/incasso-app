@@ -1,10 +1,9 @@
 {
     "inicio": "Home",
-    "facturas": {
-        "title": "Invoices",
-        "importarFacturasMasivas": "Import bulk invoices",
-        "importarFacturaIndividual": "Import individual invoice",
-        "consultarFacturas": "Consult invoices"
+    "accounts_receivable": {
+        "title": "Accounts receivable",
+        "record": "Record",
+        "viewInvoices": "View invoices"
     },
     "Clientes": {
         "title": "Clients",
@@ -29,7 +28,7 @@
     },
     "Configuracion": {
         "title": "Settings",
-        "parametrosCobranzas": "Collections parameters",
+        "parametros": "Parameters",
         "usuarios": "Users",
         "conexionApi": "API connection"
     },

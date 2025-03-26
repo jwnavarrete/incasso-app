@@ -1,10 +1,9 @@
 {
     "inicio": "Inicio",
-    "facturas": {
-        "title": "Facturas",
-        "importarFacturasMasivas": "Importar facturas masivas",
-        "importarFacturaIndividual": "Importar factura individual",
-        "consultarFacturas": "Consultar facturas"
+    "accounts_receivable": {
+        "title": "Cuentas por cobrar",
+        "registro": "Registro",        
+        "viewInvoices": "Consultar facturas"
     },
     "Clientes": {
         "title": "Clientes",
@@ -29,7 +28,7 @@
     },
     "Configuracion": {
         "title": "Configuración",
-        "parametrosCobranzas": "Parámetros de cobranzas",
+        "parametros": "Parámetros",
         "usuarios": "Usuarios",
         "conexionApi": "Conexión API"
     },

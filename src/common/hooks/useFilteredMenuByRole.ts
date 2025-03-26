@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import HomeMenu from "@/common/data/menu-rol/Home";
-import FacturaMenu from "@/common/data/menu-rol/Factura";
+import CuentasPorCobrar from "@/common/data/menu-rol/CuentasPorCobrar";
 import CobranzaMenu from "@/common/data/menu-rol/Cobranzas";
 import clienteMenu from "@/common/data/menu-rol/Clientes";
 import estadoCuentaMenu from "@/common/data/menu-rol/EstadoCuenta";
@@ -43,7 +43,7 @@ const useFilteredMenuByRole = (role: string) => {
 
   return useMemo(() => {
     const filteredHomeMenu = filterMenuByRole(HomeMenu(t), role); // Pasamos `t` a HomeMenu
-    const filteredFacturaMenu = filterMenuByRole(FacturaMenu(t), role);
+    const filteredCuentasPorCobrar = filterMenuByRole(CuentasPorCobrar(t), role);
     const filteredCobranzaMenu = filterMenuByRole(CobranzaMenu(t), role);
     const filteredClienteMenu = filterMenuByRole(clienteMenu(t), role);
     const filteredEstadoCuentaMenu = filterMenuByRole(
@@ -61,7 +61,7 @@ const useFilteredMenuByRole = (role: string) => {
     // Unimos todos los menús filtrados en un solo array
     return [
       ...filteredHomeMenu,
-      ...filteredFacturaMenu,
+      ...filteredCuentasPorCobrar,
       ...filteredCobranzaMenu,
       ...filteredClienteMenu,
       ...filteredEstadoCuentaMenu,
