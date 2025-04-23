@@ -5,6 +5,7 @@ import {
   GridColDef,
   GridRowsProp,
   GridPaginationModel,
+  GridRowSelectionModel,
 } from "@mui/x-data-grid";
 
 interface CustomizedDataGridUIProps {
@@ -16,6 +17,7 @@ interface CustomizedDataGridUIProps {
   disableColumnResize?: boolean;
   rowHeight?: number;
   onPageChange?: (page: number, pageSize: number) => void;
+  onRowSelectionChange?: (selectionModel: GridRowSelectionModel) => void; // Nueva prop
   [key: string]: any;
 }
 
@@ -28,11 +30,19 @@ const CustomizedDataGridUI: React.FC<CustomizedDataGridUIProps> = ({
   disableColumnResize = true,
   rowHeight = 50,
   onPageChange,
+  onRowSelectionChange, // Nueva prop
   ...props
 }) => {
   const handlePageChange = (paginationModel: GridPaginationModel) => {
     if (onPageChange) {
       onPageChange(paginationModel.page, paginationModel.pageSize);
+    }
+  };
+
+  const handleRowSelectionChange = (selectionModel: GridRowSelectionModel) => {
+    console.log("Filas seleccionadas:", selectionModel);
+    if (onRowSelectionChange) {
+      onRowSelectionChange(selectionModel); // Llamar al callback del padre
     }
   };
 
@@ -49,6 +59,7 @@ const CustomizedDataGridUI: React.FC<CustomizedDataGridUIProps> = ({
       }}
       pageSizeOptions={pageSizeOptions}
       onPaginationModelChange={handlePageChange}
+      onRowSelectionModelChange={handleRowSelectionChange} // Evento de selección
       disableColumnResize={disableColumnResize}
       rowHeight={rowHeight}
       density="compact"

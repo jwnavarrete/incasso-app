@@ -10,6 +10,7 @@ import CheckBoxOutlineBlankRoundedIcon from "@mui/icons-material/CheckBoxOutline
 import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import RemoveRoundedIcon from "@mui/icons-material/RemoveRounded";
 import { gray, brand } from "../themePrimitives";
+import { inherits } from "util";
 
 export const inputsCustomizations: Components<Theme> = {
   MuiButtonBase: {
@@ -195,20 +196,20 @@ export const inputsCustomizations: Components<Theme> = {
         color: theme.palette.text.primary,
         borderRadius: theme.shape.borderRadius,
         border: `1px solid ${theme.palette.divider}`,
-        backgroundColor: theme.palette.background.default,
-        transition: "border 120ms ease-in",
-        "&:hover": {
-          borderColor: gray[400],
-        },
-        [`&.${outlinedInputClasses.focused}`]: {
-          outline: `3px solid ${alpha(brand[500], 0.5)}`,
-          borderColor: brand[400],
-        },
-        ...theme.applyStyles("dark", {
-          "&:hover": {
-            borderColor: gray[500],
-          },
-        }),
+        // backgroundColor: theme.palette.background.default,
+        // transition: "border 120ms ease-in",
+        // "&:hover": {
+        //   borderColor: gray[400],
+        // },
+        // [`&.${outlinedInputClasses.focused}`]: {
+        //   outline: `3px solid ${alpha(brand[500], 0.5)}`,
+        //   borderColor: brand[400],
+        // },
+        // ...theme.applyStyles("dark", {
+        //   "&:hover": {
+        //     borderColor: gray[500],
+        //   },
+        // }),
         variants: [
           {
             props: {
@@ -228,9 +229,9 @@ export const inputsCustomizations: Components<Theme> = {
           },
         ],
       }),
-      notchedOutline: {
-        border: "none", // Elimina el borde predeterminado
-      },
+      // notchedOutline: {
+      //   border: "none", // Elimina el borde predeterminado
+      // },
     },
   },
   MuiInputAdornment: {
@@ -246,15 +247,15 @@ export const inputsCustomizations: Components<Theme> = {
   MuiFormLabel: {
     styleOverrides: {
       root: ({ theme }) => ({
-        margin: 0,
+        // margin: 0,
         // backgroundColor: 'red', // Fondo para cubrir el borde
         typography: theme.typography.caption,
-        backgroundColor: theme.palette.background.default, // Fondo para cubrir el borde
+        // backgroundColor: theme.palette.background.paper, // Fondo para cubrir el borde
         // marginBottom: 8,
-        padding: "0 4px", // Espacio adicional para el fondo
+        // padding: "0 4px", // Espacio adicional para el fondo
         "&.Mui-focused, &.MuiFormLabel-filled": {
           // transform: "translate(14px, -6px) scale(0.75)",
-          backgroundColor: theme.palette.background.default, // Fondo para cubrir el borde
+          // backgroundColor: theme.palette.background.paper,
         },
       }),
     },

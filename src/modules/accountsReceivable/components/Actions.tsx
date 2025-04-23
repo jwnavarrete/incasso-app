@@ -6,6 +6,10 @@ import { GridRenderCellParams, GridTreeNodeWithRender } from "@mui/x-data-grid";
 import { useUserContext } from "@/modules/users/context/userContext";
 import { notifyInfo } from "@/common/lib/notifications";
 import { ErrorHandler } from "@/common/lib/errors";
+import api from "@/common/lib/axiosInstance";
+import ModalNew from "./ModalNew";
+import { AccountsReceivable } from "./types";
+
 // import ModalEditEmail from "./ModalEditEmail";
 
 const Actions: React.FC<{
@@ -13,24 +17,54 @@ const Actions: React.FC<{
 }> = ({ params }) => {
   // const { updateUser, resendInvitation } = useUserContext();
   const [openModal, setOpenModal] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [currentInvoice, setCurrentInvoice] = useState<AccountsReceivable>();
 
-  const handleOpenModal = () => {
-    setOpenModal(true);
+  
+  const handleCloseModal = () => {
+    // handleGetAllInvoices();
+    setOpen(false);
   };
 
-  const handleCloseModal = () => {
-    setOpenModal(false);
+  const handleOpenModal = () => {
+    setOpen(true);
+  };
+
+
+  const handleSendNotification = (id: string) => {
+    api
+      .post(`/accounts-receivable/${id}/send-notification`)
+      .then((response) => {
+        console.log("Invoices fetched successfully:", response.data);
+        notifyInfo("Notification sent successfully");
+      })
+      .catch((error) => {
+        console.error("Error fetching invoices:", error);
+      });
   };
 
   const actions = [
     {
-      title: "Edit email address",
+      title: "Resend Notification",
       onClick: () => {
-        handleOpenModal();
+        handleSendNotification(params.row.id);
         console.log(`Edit action for row ${params.id}`);
       },
     },
   ];
+
+  actions.push({
+    title: "Edit",
+    onClick: () => {
+      try {
+        setCurrentInvoice(params.row);
+        handleOpenModal()
+        // resendInvitation(params.row.id);
+      } catch (error) {
+        ErrorHandler.showError(error, true);
+      }
+    },
+  });
 
   if (params.row.status === "pending" || params.row.status === "cancelled") {
     actions.push({
@@ -111,7 +145,14 @@ const Actions: React.FC<{
           horizontal: "right",
         }}
         actions={actions}
-      />      
+      />
+
+      <ModalNew
+        open={open}
+        onClose={handleCloseModal}
+        onSave={handleCloseModal}
+        invoice={currentInvoice} // Pass the current invoice if available
+      />
     </Box>
   );
 };

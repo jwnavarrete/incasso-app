@@ -17,6 +17,7 @@ import useClientRouter from "@/common/hooks/useNavigations";
 import { registerUserSchema } from "@/modules/users/validations/user.schema";
 import { useUserContext } from "@/modules/users/context/userContext";
 import { IRegisterInvitedUser } from "@/modules/users/interfaces/user.interface";
+import { decrypt } from "@/common/lib/encryption";
 
 const ChangePassword: React.FC = () => {
   const { redirectTo, redirectToLoginCompany } = useClientRouter();
@@ -59,13 +60,21 @@ const ChangePassword: React.FC = () => {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get("token");
-    const dl_userid = urlParams.get("dl_userid");
-
-    if (token && dl_userid) {
-      validateToken(token, dl_userid);
-    } else {
+    console.log("token", token);
+    if (!token) {
       redirectToLoginCompany();
     }
+
+    console.log("token", token);
+    const demo = decrypt(token as string);
+    console.log("demo", demo);
+    // const dl_userid = urlParams.get("dl_userid");
+
+    // if (token && dl_userid) {
+    //   validateToken(token, dl_userid);
+    // } else {
+    //   redirectToLoginCompany();
+    // }
   }, []);
 
   const validateToken = async (token: string, userId: string) => {
