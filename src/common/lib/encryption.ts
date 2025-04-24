@@ -8,11 +8,17 @@ const encrypt = (data: object): string => {
 };
 
 const decrypt = (ciphertext: string): any => {
-  console.log(secret);
-  const bytes = CryptoJS.AES.decrypt(ciphertext, secret);
-  const decrypted = bytes.toString(CryptoJS.enc.Utf8);
-  console.log("decrypted", decrypted);
-  return JSON.parse(decrypted);
+  try {
+    const bytes = CryptoJS.AES.decrypt(ciphertext, secret);
+    const decrypted = bytes.toString(CryptoJS.enc.Utf8);
+    if (!decrypted) {
+      throw new Error("Decryption failed: empty result");
+    }
+    return JSON.parse(decrypted);
+  } catch (error) {
+    // console.error("Decryption error:", error.message);
+    return null; // or handle the error as needed
+  }
 };
 
 export { encrypt, decrypt };

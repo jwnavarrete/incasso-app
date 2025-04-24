@@ -13,6 +13,15 @@ const useClientRouter = () => {
     router.push(`https://${slug}.${DOMAIN_NAME}/`);
   };
 
+  const redirectToSlugLoginCompany = (subdomain: string, email?: string) => {
+    let baseUrl = `https://${subdomain}.${DOMAIN_NAME}/auth/login_company`;
+    // Si se proporciona un correo electrónico, lo agregamos como parámetro de consulta
+    if (email) {
+      baseUrl += `/email_password?email=${email}`;
+    }
+    router.push(baseUrl);
+  };
+
   const redirectToLoginCompany = () => {
     router.push(`https://auth.${DOMAIN_NAME}/auth/login_company`);
   };
@@ -25,6 +34,7 @@ const useClientRouter = () => {
     redirectTo,
     redirectToSlug,
     redirectToLoginCompany,
+    redirectToSlugLoginCompany,
     redirectToSignUp,
   };
 };

@@ -3,7 +3,6 @@ import {
   showNext,
   showSlugLogin,
   showLoginCompany,
-  setActiveSlugLogin,
   showSlugDashboard,
 } from "./functions";
 import {

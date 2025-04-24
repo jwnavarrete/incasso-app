@@ -50,6 +50,11 @@ const EmailPasswordComponent: React.FC = () => {
 
   useEffect(() => {
     setClient(true);
+    const urlParams = new URLSearchParams(window.location.search);
+    const emailParam = urlParams.get("email");
+    if (emailParam) {
+      methods.setValue("email", emailParam);
+    }
     setSubdomain(getSubdomain());
   }, []);
 
