@@ -7,6 +7,7 @@ import clienteMenu from "@/common/data/menu-rol/Clientes";
 import estadoCuentaMenu from "@/common/data/menu-rol/EstadoCuenta";
 import reporteMenu from "@/common/data/menu-rol/Reportes";
 import configuracionMenu from "@/common/data/menu-rol/Configuracion";
+import myAccounts from "@/common/data/menu-rol/MyAccounts";
 // import seguridadMenu from "@/common/data/menu-rol/Seguridad";
 import soporteMenu from "@/common/data/menu-rol/Soporte";
 
@@ -43,7 +44,10 @@ const useFilteredMenuByRole = (role: string) => {
 
   return useMemo(() => {
     const filteredHomeMenu = filterMenuByRole(HomeMenu(t), role); // Pasamos `t` a HomeMenu
-    const filteredCuentasPorCobrar = filterMenuByRole(CuentasPorCobrar(t), role);
+    const filteredCuentasPorCobrar = filterMenuByRole(
+      CuentasPorCobrar(t),
+      role
+    );
     const filteredCobranzaMenu = filterMenuByRole(CobranzaMenu(t), role);
     const filteredClienteMenu = filterMenuByRole(clienteMenu(t), role);
     const filteredEstadoCuentaMenu = filterMenuByRole(
@@ -58,6 +62,8 @@ const useFilteredMenuByRole = (role: string) => {
     // const filteredSeguridadMenu = filterMenuByRole(seguridadMenu(t), role);
     const filteredSoporteMenu = filterMenuByRole(soporteMenu(t), role);
 
+    const filteredMyAccounts = filterMenuByRole(myAccounts(t), role);
+
     // Unimos todos los menús filtrados en un solo array
     return [
       ...filteredHomeMenu,
@@ -69,6 +75,7 @@ const useFilteredMenuByRole = (role: string) => {
       ...filteredConfiguracionMenu,
       // ...filteredSeguridadMenu,
       ...filteredSoporteMenu,
+      ...filteredMyAccounts,
     ];
   }, [role, t]); // Dependemos del 'role' y 't' para re-calcular cuando el rol o el idioma cambien
 };

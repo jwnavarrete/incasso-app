@@ -18,6 +18,7 @@ import { registerUserSchema } from "@/modules/users/validations/user.schema";
 import { useUserContext } from "@/modules/users/context/userContext";
 import { IRegisterInvitedUser } from "@/modules/users/interfaces/user.interface";
 import { decrypt } from "@/common/lib/encryption";
+import Link from "next/link";
 
 const ChangePassword: React.FC = () => {
   const { redirectTo, redirectToLoginCompany, redirectToSlugLoginCompany } =
@@ -39,7 +40,12 @@ const ChangePassword: React.FC = () => {
   const handleAuth = async (data: any) => {
     try {
       console.log(authParams);
-      if (!authParams.token || !authParams.userId || !authParams.token || !authParams.slug) {
+      if (
+        !authParams.token ||
+        !authParams.userId ||
+        !authParams.token ||
+        !authParams.slug
+      ) {
         throw new Error("Invalid parameters");
       }
 
@@ -117,7 +123,7 @@ const ChangePassword: React.FC = () => {
           <FormProvider {...methods}>
             <Grid container spacing={2} mt={0.5}>
               <Grid item xs={12}>
-                <InputHookForm name="email" required label="Email" disabled />
+                <InputHookForm name="email" required label="Email" />
               </Grid>
 
               <Grid item xs={12}>
@@ -156,6 +162,22 @@ const ChangePassword: React.FC = () => {
               </Grid>
             </Grid>
           </FormProvider>
+
+          <Box
+            sx={{
+              mt: 2,
+              textAlign: "center",
+            }}
+          >
+            <Typography variant="body2" align="center" sx={{ mt: 2 }}>
+              <span>
+                Already have an account? Sign in here for the best experience.
+              </span>
+              <Link href="/auth/login_company/email_password" passHref>
+                <Button variant="text">login</Button>
+              </Link>
+            </Typography>
+          </Box>
         </Box>
       </Box>
     </Container>

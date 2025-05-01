@@ -3,13 +3,12 @@ import React, { useState } from "react";
 import { Button } from "@mui/material";
 import { Grid } from "@mui/material";
 import { Box } from "@mui/system";
-import SpanningTable from "./SpanningTable";
 import { columns } from "./Columns";
 import CustomizedDataGridUI from "@/common/components/ui/CustomizedDataGridUI";
 import api from "@/common/lib/axiosInstance";
 import { useEffect } from "react";
 import ModalNew from "./ModalNew";
-import { AccountsReceivable } from "./types";
+import { AccountsReceivable, ICollectionParameters } from "./types";
 import { TfiReload } from "react-icons/tfi";
 import ModalImport from "./ModalImport";
 
@@ -18,9 +17,14 @@ const InvoiceComponent: React.FC = () => {
   const [openImport, setOpenImport] = useState(false);
   const [invoicesData, setInvoicesData] = useState<AccountsReceivable[]>([]);
   const [currentInvoice, setCurrentInvoice] = useState<AccountsReceivable>();
+  const [tenantParameter, setTenantParameter] =
+    useState<ICollectionParameters>();
+
+  const PARAMETER_ID = process.env.NEXT_PUBLIC_PARAMETER_ID || "";
 
   useEffect(() => {
     handleGetAllInvoices();
+    getTenantParameter();
   }, []);
 
   const handleOpenImportModal = () => {
@@ -30,7 +34,22 @@ const InvoiceComponent: React.FC = () => {
     setOpenImport(false);
   };
 
+  const getTenantParameter = () => {
+    api
+      .get(`/parameters/${PARAMETER_ID}`)
+      .then((response) => {
+        const _tenantParameter: ICollectionParameters = response.data;
+        console.log(`_tenantParameter`, _tenantParameter);
+        setTenantParameter(_tenantParameter);
+        // console.log("Tenant parameter fetched successfully:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching tenant parameter:", error);
+      });
+  };
+
   const handleGetAllInvoices = () => {
+    console.log("Fetching invoices...");
     api
       .get("/accounts-receivable")
       .then((response) => {
@@ -43,7 +62,7 @@ const InvoiceComponent: React.FC = () => {
   };
 
   const handleOpenNewInvoiceModal = () => {
-    setCurrentInvoice(undefined);
+    setCurrentInvoice(undefined);    
     setOpen(true);
   };
 
@@ -93,7 +112,7 @@ const InvoiceComponent: React.FC = () => {
           </Button>
         </Box>
       </Box>
-
+      {/* {JSON.stringify(PARAMETER_ID)} */}
       {/* Modal */}
       <ModalImport
         open={openImport}
@@ -106,6 +125,7 @@ const InvoiceComponent: React.FC = () => {
         onClose={handleCloseModal}
         onSave={handleCloseModal}
         invoice={currentInvoice} // Pass the current invoice if available
+        tenantParameter={tenantParameter} // Pass the tenant parameter
       />
 
       <Grid sx={{ mt: 2 }}>

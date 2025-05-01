@@ -54,7 +54,7 @@ const Actions: React.FC<{
   ];
 
   actions.push({
-    title: "Edit",
+    title: "Show Details",
     onClick: () => {
       try {
         setCurrentInvoice(params.row);
