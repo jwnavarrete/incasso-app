@@ -1,10 +1,9 @@
 "use client";
 import React, { Suspense } from "react";
-import MainGrid from "@/common/components/dashboard";
-import HomeComponent from "@/common/components/home";
+import HomeComponent from "@/components/home";
 import SkeletonLoading from "./loading";
-import useAuthenticate from "@/common/hooks/useAuthenticate";
-import LoadingUI from "@/common/components/ui/LoadingUI";
+import useAuthenticate from "@/hooks/useAuthenticate";
+import LoadingUI from "@/components/ui/LoadingUI";
 
 const Dashboard: React.FC = () => {
 

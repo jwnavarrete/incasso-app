@@ -7,14 +7,14 @@ import { alpha } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import AppNavbar from "@/common/components/layout/AppNavbar";
-import Header from "@/common/components/layout/Header";
-import SideMenu from "@/common/components/layout/SideMenu";
-import AppTheme from "@/theme/AppTheme";
-import { AppState } from "@/common/store/global.store"; // Acción de logout
-import { initializeUser } from "@/common/store/global.store";
+import AppNavbar from "@/components/layout/AppNavbar";
+import Header from "@/components/layout/Header";
+import SideMenu from "@/components/layout/SideMenu";
+import AppTheme from "@/theme/ThemeProvider";
+import { AppState } from "@/store/global.store"; // Acción de logout
+import { initializeUser } from "@/store/global.store";
 import { ToastContainer } from "react-toastify";
-import EmailVerified from "@/common/components/layout/EmailVerified";
+import EmailVerified from "@/components/layout/EmailVerified";
 
 export default function TenantLayout(props: {
   disableCustomTheme?: boolean;

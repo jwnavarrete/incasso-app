@@ -1,13 +1,13 @@
 "use client";
 import React, { useState } from "react";
-import DynamicTabsUI from "@/common/components/ui/DynamicTabsUI";
+import DynamicTabsUI from "@/components/ui/DynamicTabsUI";
 import { Box } from "@mui/system";
 import { useSelector } from "react-redux";
 import { Grid } from "@mui/material";
 import { Button, Card, CardActions, CardContent, Divider } from "@mui/material";
-import DynamicOutlinedInput from "@/common/components/ui/OutlinedInput";
-import { AppState } from "@/common/store/global.store";
-import { ROLES } from "@/common/lib/constant";
+import DynamicOutlinedInput from "@/components/ui/OutlinedInput";
+import { AppState } from "@/store/global.store";
+import { UserRoles } from "@/common/enums/userRoles";
 
 const HelloWorld: React.FC = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -18,25 +18,25 @@ const HelloWorld: React.FC = () => {
       label: "Parametros General",
       value: "parametros-general",
       content: <ParametrosComponent />,
-      roles: [ROLES.SUPER_ADMIN], // Roles permitidos
+      roles: [UserRoles.SUPER_ADMIN], // Roles permitidos
     },
     {
       label: "Registro",
       value: "registro",
       content: <RegistroComponent />,
-      roles: [ROLES.SUPER_ADMIN], // Solo visible para admin
+      roles: [UserRoles.SUPER_ADMIN], // Solo visible para admin
     },
     {
       label: "Parametros de Cobro",
       value: "parametros-cobro",
       content: <CobroComponent />,
-      roles: [ROLES.TENANT_ADMIN], // Roles permitidos
+      roles: [UserRoles.TENANT_ADMIN], // Roles permitidos
     },
   ];
 
   // Filtrar tabs según el rol del usuario
   const filteredTabs = tabs.filter(
-    (tab) => user?.role && tab.roles.includes(user.role)
+    (tab) => user?.role && tab.roles.includes(user.role as UserRoles)
   );
 
   return (

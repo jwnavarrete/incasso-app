@@ -1,8 +1,8 @@
 "use client";
-import LoadingUI from "@/common/components/ui/LoadingUI";
-import useAuthenticate from "@/common/hooks/useAuthenticate";
-import UserManagement from "@/modules/users/components/management";
-import { UserProvider } from "@/modules/users/context/userContext";
+import LoadingUI from "@/components/ui/LoadingUI";
+import useAuthenticate from "@/hooks/useAuthenticate";
+import UserManagement from "./components";
+import { UserProvider } from "@/context";
 import React, { Suspense } from "react";
 
 const UsersPage: React.FC = () => {

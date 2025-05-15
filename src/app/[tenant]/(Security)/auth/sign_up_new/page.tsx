@@ -1,10 +1,10 @@
 "use client";
 import React, { Suspense } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
-import { AuthProvider } from "@/modules/auth/context/authContext";
-import SignUpNew from "@/modules/auth/components/sign_up_new";
-import LoadingUI from "@/common/components/ui/LoadingUI";
-import ColorMode from "@/theme/ColorModeSelector";
+import { AuthProvider } from "@/context";
+import SignUpNew from "./components";
+import LoadingUI from "@/components/ui/LoadingUI";
+import ColorMode from "@/components/ui/ColorModeSelectorUI";
 
 export default function page() {
   return (

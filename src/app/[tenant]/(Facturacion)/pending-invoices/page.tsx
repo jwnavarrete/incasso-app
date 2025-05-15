@@ -1,6 +1,6 @@
 'use client';
-import PendingInvoices from "@/modules/pendingInvoices";
-import { PendingInvoicesProvider } from "@/modules/pendingInvoices/PendingInvoicesContext";
+import PendingInvoices from "./components";
+import { PendingInvoicesProvider } from "@/context";
 import React from "react";
 
 const InvoicePendingPage: React.FC = () => {

@@ -2,19 +2,19 @@
 import {
   getClientSessionByCode,
   setAuthSession,
-} from "@/common/lib/session";
+} from "@/utils/session";
 import { useEffect } from "react";
 import { Box, CircularProgress, Typography } from "@mui/material";
-import { AUTH_TOKEN } from "@/common/lib/constant";
-import { iTokens } from "@/modules/auth/interfaces/auth.interface";
-import useClientRouter from "@/common/hooks/useNavigations";
-import { notifyError } from "@/common/lib/notifications";
+import { AuthCookieNames } from "@/common/enums/authCookieNames";
+import { iTokens } from "@/common/types/auth/auth";
+import useClientRouter from "@/hooks/useNavigations";
+import { notifyError } from "@/utils/notifications";
 
 const RedirectPage = () => {
   const { redirectTo, redirectToLoginCompany } = useClientRouter();
 
   useEffect(() => {
-    const session = getClientSessionByCode(AUTH_TOKEN);
+    const session = getClientSessionByCode(AuthCookieNames.AUTH_TOKEN);
     if (session) {
       try {
         const jsonParsed: iTokens = JSON.parse(session);

@@ -1,5 +1,5 @@
-import RegisterComponent from "@/modules/users/components/register";
-import { UserProvider } from "@/modules/users/context/userContext";
+import RegisterComponent from "@/app/[tenant]/(Security)/users/register/components";
+import { UserProvider } from "@/context";
 import React from "react";
 
 const RegisterPage: React.FC = () => {

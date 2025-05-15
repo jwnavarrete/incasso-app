@@ -1,8 +1,8 @@
 "use client";
 import * as React from "react";
-import ReduxProvider from "@/common/providers/ReduxProvider";
+import ReduxProvider from "@/providers/ReduxProvider";
 import { I18nextProvider } from "react-i18next";
-import i18next from "@/common/lib/i18n"; // Importa tu configuración de i18next
+import i18next from "@/common/config/i18n"; // Importa tu configuración de i18next
 
 export default function LocaleLayout({
   children,

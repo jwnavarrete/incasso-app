@@ -1,4 +1,4 @@
-import LandingComponent from "@/common/components/landing";
+import LandingComponent from "@/components/landing";
 
 const LandingPage: React.FC = () => {
   return (

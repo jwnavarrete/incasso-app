@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { AuthMiddleware, SlugMiddleware } from "@/common/middleware";
-import { TenantMiddleware } from "./common/middleware/tenant.middleware";
+import { AuthMiddleware, SlugMiddleware, TenantMiddleware } from "@/common/middleware";
+// import { SlugMiddleware} from "@/middleware/slug.middleware";
+// import { TenantMiddleware } from "./middleware/tenant.middleware";
 
 export const config = {
   matcher: [

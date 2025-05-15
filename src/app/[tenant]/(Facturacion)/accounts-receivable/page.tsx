@@ -1,11 +1,13 @@
-import InvoiceComponent from "@/modules/accountsReceivable/components";
-// import { UserProvider } from "@/modules/users/context/userContext";
+import InvoiceComponent from "./components";
 import React from "react";
+import { PendingInvoicesProvider } from "@/context";
+
 
 const RegisterPage: React.FC = () => {
   return (
-    // <UserProvider>
-    <InvoiceComponent />
+    <PendingInvoicesProvider>
+      <InvoiceComponent />
+    </PendingInvoicesProvider>
     // </UserProvider>
   );
 };
