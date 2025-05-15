@@ -18,7 +18,8 @@ import {
   TableRow,
   Paper,
 } from "@mui/material";
-import { AccountsReceivable, AccountsReceivableImport } from "./types";
+
+import {AccountsReceivableImport} from "@/common/types/account-receivable/invoice"
 
 interface ModalImportProps {
   open: boolean;

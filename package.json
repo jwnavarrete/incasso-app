@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_OPTIONS='--inspect' next dev --turbopack",
-    "dev:secure": "NODE_OPTIONS=' --loader ts-node/esm --trace-warnings --no-warnings' ts-node server.mts",
+    "dev:secure2": "NODE_OPTIONS=' --loader ts-node/esm --trace-warnings --no-warnings' ts-node server.mts",
+    "dev:secure": "cross-env NODE_OPTIONS='--loader ts-node/esm --trace-warnings --no-warnings' ts-node server.mts",
     "dev:socket": "NODE_OPTIONS=' --loader ts-node/esm --trace-warnings --no-warnings' ts-node server.mts",
     "build": "next build",
     "start": "next start",

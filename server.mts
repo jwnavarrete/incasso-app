@@ -83,8 +83,14 @@ app.prepare().then(() => {
     // *************** SOCKET.IO ****************
 
 
-    server.listen(443, (err?: Error): void => {
+    // server.listen(443, (err?: Error): void => {
+    //     if (err) throw err;
+    //     console.log('> Ready on https://localhost:443');
+    // });
+
+    server.listen(443, '127.0.0.1', (err?: Error): void => {
         if (err) throw err;
-        console.log('> Ready on https://localhost:443');
+        console.log('> Ready on port 443');
     });
+
 });

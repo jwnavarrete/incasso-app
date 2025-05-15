@@ -8,15 +8,15 @@ import CustomizedDataGridUI from "@/components/ui/CustomizedDataGridUI";
 import api from "@/lib/axiosInstance";
 import { useEffect } from "react";
 import ModalNew from "./ModalNew";
-import { AccountsReceivable, ICollectionParameters } from "./types";
 import { TfiReload } from "react-icons/tfi";
 import ModalImport from "./ModalImport";
+import {ICollectionParameters, AccountsReceivableInvoice} from "@/common/types/account-receivable/invoice"
 
 const InvoiceComponent: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [openImport, setOpenImport] = useState(false);
-  const [invoicesData, setInvoicesData] = useState<AccountsReceivable[]>([]);
-  const [currentInvoice, setCurrentInvoice] = useState<AccountsReceivable>();
+  const [invoicesData, setInvoicesData] = useState<AccountsReceivableInvoice[]>([]);
+  const [currentInvoice, setCurrentInvoice] = useState<AccountsReceivableInvoice>();
   const [tenantParameter, setTenantParameter] =
     useState<ICollectionParameters>();
 

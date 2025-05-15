@@ -54,7 +54,7 @@ export interface Installment {
     updatedAt: string;
 }
 
-interface PaymentAgreement {
+export interface PaymentAgreement {
     id: string;
     accountsReceivableId: string;
     initialPayment: number;
