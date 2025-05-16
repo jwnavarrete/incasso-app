@@ -18,7 +18,7 @@ const formatDate = (dateString: string) => {
 
 export const columns: CollapsibleTableColumn[] = [
     { id: 'invoiceNumber', label: 'Invoice Number', align: 'left' },
-    { id: 'customerName', label: 'Customer Name', align: 'left' },
+    // { id: 'customerName', label: 'Customer Name', align: 'left' },
     {
         id: 'issueDate',
         label: 'Issue Date',

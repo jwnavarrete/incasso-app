@@ -327,9 +327,11 @@ const ModalPaymentAgreement: React.FC<ModalPaymentAgreementProps> = ({
                 <Button onClick={handleClose} color="secondary">
                     Cancelar
                 </Button>
-                <Button onClick={handleSave} color="primary">
-                    Guardar
-                </Button>
+                {!hasPaymentAgreement && (
+                    <Button onClick={handleSave} color="primary">
+                        Guardar
+                    </Button>
+                )}
             </DialogActions>
         </Dialog>
     );

@@ -5,8 +5,8 @@ import { usePendingInvoices } from "@/context";
 import ActionsListUI from "@/components/ui/ActionsListUI";
 import { GridMoreVertIcon } from "@mui/x-data-grid";
 import ModalInvoice from "./ModalInvoice";
-import { Button } from "@mui/material";
-import { FaDollarSign } from "react-icons/fa"; // Cambiado el ícono
+import { Button, ButtonGroup } from "@mui/material";
+import { FaDollarSign, FaInfoCircle } from "react-icons/fa"; // Cambiado el ícono
 
 const InvoiceActions = ({ row }: { row: any }) => {
     const { openPendingModal } = usePendingInvoices();
@@ -22,12 +22,12 @@ const InvoiceActions = ({ row }: { row: any }) => {
         setIsViewDetailsModalOpen(true);
     };
 
-    if (row.receivableStatus === 'pending') {
-        actionsList.push({
-            title: "Register Payment",
-            onClick: handleRegisterPayment,
-        });
-    }
+    // if (row.receivableStatus === 'pending') {
+    //     actionsList.push({
+    //         title: "Register Payment",
+    //         onClick: handleRegisterPayment,
+    //     });
+    // }
 
     // Add the "View Details" action
     actionsList.push({
@@ -37,17 +37,35 @@ const InvoiceActions = ({ row }: { row: any }) => {
 
     return (
         <>
-            {row.receivableStatus === 'pending' && (
+
+
+            <ButtonGroup variant="contained" aria-label="Basic button group">
+                {(row.collectionStatus === 'aanmaning'
+                    || row.collectionStatus === 'sommatie'
+                    || row.collectionStatus === 'payment_agreement'
+                ) && (
+                        <Button
+                            onClick={handleRegisterPayment}
+                            variant="contained"
+                            color="primary"
+                            size="small"
+                            style={{ textTransform: "none" }}
+                        >
+                            <FaDollarSign /> Pay
+                        </Button>
+                    )}
                 <Button
-                    onClick={handleRegisterPayment}
-                    variant="contained"
+                    onClick={handleViewDetails}
+                    variant="outlined"
                     color="primary"
                     size="small"
                     style={{ textTransform: "none" }}
                 >
-                    <FaDollarSign /> Pay
-                </Button>
-            )}
+                    <FaInfoCircle /> Detail
+                </Button>                {/* <Button>Three</Button> */}
+                
+            </ButtonGroup>
+
             {/* <ActionsListUI
                 buttonIcon={<GridMoreVertIcon />}
                 anchorOrigin={{ vertical: "top", horizontal: "left" }}

@@ -45,14 +45,18 @@ const Actions: React.FC<{
   };
 
   const actions = [
-    {
+
+  ];
+
+  if (params.row.status === "active") {
+    actions.push({
       title: "Resend Notification",
       onClick: () => {
         handleSendNotification(params.row.id);
         console.log(`Edit action for row ${params.id}`);
       },
-    },
-  ];
+    });
+  }
 
   actions.push({
     title: "Show Details",
@@ -134,7 +138,7 @@ const Actions: React.FC<{
   }
 
   if ((params.row.collectionStatus === "aanmaning"
-    || params.row.collectionStatus === "ingebrekestelling")
+    || params.row.collectionStatus === "sommatie")
     || params.row.hasPaymentAgreement === true
   ) {
     actions.push({
