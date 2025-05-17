@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { allowedAuthPaths } from "@/common/middleware/constantes";
+import { allowedAuthPaths } from "./constantes";
 import { showSlugLogin } from "./functions";
 
 export const AuthMiddleware = async (subdomain: string, req: NextRequest) => {

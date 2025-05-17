@@ -1,25 +1,20 @@
 "use client";
 import * as React from "react";
-import { Provider } from "react-redux"; // Para manejar el estado de Redux
-import { Geist, Geist_Mono } from "next/font/google";
-import store from "@/common/store/global.store";
-import "@/app/globals.css";
+import ReduxProvider from "@/providers/ReduxProvider";
+import { I18nextProvider } from "react-i18next";
+import i18next from "@/common/config/i18n"; // Importa tu configuración de i18next
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-export default function Dashboard(props: { children: React.ReactNode }) {
+export default function LocaleLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <Provider store={store}>{props.children}</Provider>
+      <body>
+        <ReduxProvider>
+          <I18nextProvider i18n={i18next}>{children}</I18nextProvider>
+        </ReduxProvider>
       </body>
     </html>
   );

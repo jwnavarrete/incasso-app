@@ -1,0 +1,39 @@
+{
+    "inicio": "Home",
+    "accounts_receivable": {
+        "title": "Accounts receivable",
+        "record": "Record",
+        "viewInvoices": "View invoices"
+    },
+    "Clientes": {
+        "title": "Clients",
+        "listadoClientes": "Client list",
+        "historialFacturacion": "Billing history",
+        "actualizarCliente": "Update client"
+    },
+    "Cobranzas": {
+        "title": "Collections",
+        "cobrosPendientes": "Pending collections",
+        "cobrosRealizados": "Completed collections",
+        "registrarCobro": "Register collection"
+    },
+    "EstadoCuenta": {
+        "title": "Account status",
+        "estadoCuentasPorCliente": "Account status by client",
+        "estadoCuentasGeneral": "General account status"
+    },
+    "Reportes": {
+        "title": "Reports",
+        "reporteCobranzas": "Collections report"
+    },
+    "Configuracion": {
+        "title": "Settings",
+        "parametros": "Parameters",
+        "usuarios": "Users",
+        "conexionApi": "API connection"
+    },
+    "Soporte": {
+        "title": "Support",
+        "technicalSupport": "Technical support"
+    }
+}

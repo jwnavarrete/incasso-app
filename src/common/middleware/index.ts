@@ -1,4 +1,3 @@
-import { AuthMiddleware } from "./auth.middleware";
-import { SlugMiddleware } from "./slug.middleware";
-
-export { AuthMiddleware, SlugMiddleware };
+export { AuthMiddleware } from './auth.middleware';
+export { SlugMiddleware } from './slug.middleware'
+export { TenantMiddleware } from './tenant.middleware'

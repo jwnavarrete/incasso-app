@@ -3,7 +3,6 @@ import {
   showNext,
   showSlugLogin,
   showLoginCompany,
-  setActiveSlugLogin,
   showSlugDashboard,
 } from "./functions";
 import {
@@ -11,7 +10,7 @@ import {
   publicTenantPaths,
   privateTenantPaths,
 } from "./constantes";
-import { isAccessTokenValid } from "../lib/session";
+import { isAccessTokenValid } from "@/utils/session";
 
 export const TenantMiddleware = async (subdomain: string, req: NextRequest) => {
   // NO REALIZAR VALIDACIONES DE AUTENTICACION SI ES EL SUBDOMINIO DE AUTENTICACION

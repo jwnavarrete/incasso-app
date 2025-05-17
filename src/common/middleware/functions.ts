@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { DOMAIN_NAME } from "@/common/middleware/constantes";
+import { DOMAIN_NAME } from "./constantes";
 import axios from "axios";
 
 const setActiveSlugLogin = (subdomain: string) => {

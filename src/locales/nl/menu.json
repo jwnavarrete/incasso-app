@@ -1,0 +1,39 @@
+{
+    "inicio": "Begin",
+    "accounts_receivable": {
+        "title": "Te ontvangen rekeningen",
+        "registro": "Registratie",
+        "viewInvoices": "Facturen bekijken"
+    },
+    "Clientes": {
+        "title": "Klanten",
+        "listadoClientes": "Klantenlijst",
+        "historialFacturacion": "Facturatiegeschiedenis",
+        "actualizarCliente": "Klant bijwerken"
+    },
+    "Cobranzas": {
+        "title": "Incasso's",
+        "cobrosPendientes": "Openstaande incasso's",
+        "cobrosRealizados": "Uitgevoerde incasso's",
+        "registrarCobro": "Incasso registreren"
+    },
+    "EstadoCuenta": {
+        "title": "Rekeningoverzicht",
+        "estadoCuentasPorCliente": "Rekeningoverzicht per klant",
+        "estadoCuentasGeneral": "Algemeen rekeningoverzicht"
+    },
+    "Reportes": {
+        "title": "Rapporten",
+        "reporteCobranzas": "Incasso rapport"
+    },
+    "Configuracion": {
+        "title": "Configuratie",
+        "parametros": "parameters",
+        "usuarios": "Gebruikers",
+        "conexionApi": "API verbinding"
+    },
+    "Soporte": {
+        "title": "Ondersteuning",
+        "technicalSupport": "Technische ondersteuning"
+    }
+}

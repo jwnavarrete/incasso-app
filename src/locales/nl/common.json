@@ -1,0 +1,52 @@
+{
+    "Menu": {
+        "home": "Home"
+    },
+    "profile": {
+        "title": "Profiel"
+    },
+    "my_account": {
+        "title": "Mijn account"
+    },
+    "settings": {
+        "title": "Instellingen"
+    },
+    "logout": "Uitloggen",
+    "home": {
+        "title": "Welkom bij Incasso App",
+        "subtitle": "Uw alles-in-één oplossing voor het beheren van uw financiën."
+    },
+    "LandingPage": {
+        "Hero": {
+            "title": {
+                "part1": "Onze nieuwste",
+                "part2": "producten"
+            },
+            "description": "Verken ons geavanceerde dashboard, dat hoogwaardige oplossingen biedt die zijn afgestemd op uw behoeften. Verhoog uw ervaring met eersteklas functies en diensten."
+        },
+        "auth": {
+            "login": "Inloggen",
+            "register": "Aanmelden"
+        }
+    },
+    "auth": {
+        "sign_up": "Aanmelden",
+        "next": "Volgende",
+        "login_company": {
+            "title": "Log in op uw account",
+            "email": "Voer uw werk e-mail in",
+            "no_account": "Heeft u nog geen account?"
+        },
+        "already_signed_in": "U bent al ingelogd op deze accounts:",
+        "enter_slug": {
+            "title": {
+                "bold": "Log",
+                "normal": "in"
+            },
+            "subtitle": "Voer het webadres van uw account in",
+            "enter_slug": "Voer uw slug in",
+            "forgot_address": "Uw account webadres vergeten?",
+            "no_account_yet": "Heeft u nog geen account?"
+        }
+    }
+}
