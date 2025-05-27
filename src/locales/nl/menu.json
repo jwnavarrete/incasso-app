@@ -15,7 +15,8 @@
         "title": "Incasso's",
         "cobrosPendientes": "Openstaande incasso's",
         "cobrosRealizados": "Uitgevoerde incasso's",
-        "registrarCobro": "Incasso registreren"
+        "registrarCobro": "Incasso registreren",
+        "contribucionesColectivas": "Collectieve bijdragen"
     },
     "EstadoCuenta": {
         "title": "Rekeningoverzicht",

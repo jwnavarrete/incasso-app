@@ -27,7 +27,7 @@ const SelectOptionUI: React.FC<SelectOptionUIProps> = ({
   return (
     <FormControl variant="outlined" fullWidth>
       <InputLabel>{label}</InputLabel>
-      <Select value={value} onChange={handleChange} label={label}>
+      <Select value={value} onChange={handleChange} label={label} size="small" fullWidth>
         {options.map((option) => (
           <MenuItem key={option.value} value={option.value}>
             {option.description}

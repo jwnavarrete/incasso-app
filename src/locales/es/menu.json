@@ -15,7 +15,8 @@
         "title": "Cobranzas",
         "cobrosPendientes": "Cobros pendientes",
         "cobrosRealizados": "Cobros realizados",
-        "registrarCobro": "Registrar cobro"
+        "registrarCobro": "Registrar cobro",
+        "contribucionesColectivas": "Contribuciones colectivas"
     },
     "EstadoCuenta": {
         "title": "Estado de cuenta",

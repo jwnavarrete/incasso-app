@@ -42,6 +42,7 @@ const InvoiceActions = ({ row }: { row: any }) => {
             <ButtonGroup variant="contained" aria-label="Basic button group">
                 {(row.collectionStatus === 'aanmaning'
                     || row.collectionStatus === 'sommatie'
+                    || row.collectionStatus === "ingebrekestelling"
                     || row.collectionStatus === 'payment_agreement'
                 ) && (
                         <Button

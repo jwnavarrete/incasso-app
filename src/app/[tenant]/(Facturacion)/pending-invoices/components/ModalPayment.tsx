@@ -118,7 +118,7 @@ const ModalPayment: React.FC = () => {
 
     useEffect(() => {
         if (_selectedInvoice) {
-            if (_selectedInvoice?.paymentAgreement) {
+            if (_selectedInvoice?.paymentAgreement && _selectedInvoice.collectionStatus !== "ingebrekestelling") {
                 let pagoInicial = 0;
                 const cuotas = [..._selectedInvoice?.paymentAgreement?.Installments]
                     .filter((c) => c.status === "pending" || c.status === "overdue")
@@ -212,7 +212,7 @@ const ModalPayment: React.FC = () => {
                             <Grid item xs={12}>
                                 <Tabs value={tabValue} onChange={(_, newValue) => setTabValue(newValue)}>
                                     <Tab label="Información General" />
-                                    {_selectedInvoice?.paymentAgreement && (
+                                    {_selectedInvoice?.paymentAgreement && _selectedInvoice?.collectionStatus !== "ingebrekestelling" && (
                                         <Tab label="Acuerdo de Pago" />
                                     )}
                                 </Tabs>
@@ -268,7 +268,7 @@ const ModalPayment: React.FC = () => {
                                 )}
                             </Grid>
                             <Grid item xs={12}>
-                                {_selectedInvoice?.paymentAgreement ? (
+                                {_selectedInvoice?.paymentAgreement && _selectedInvoice?.collectionStatus !== "ingebrekestelling" ? (
                                     <>
                                         <Typography variant="subtitle1" sx={{ mt: 0.5 }}>
                                             Cuotas seleccionadas para pagar:
@@ -334,14 +334,17 @@ const ModalPayment: React.FC = () => {
                                         <Typography variant="body2" sx={{ mt: 2 }}>
                                             No hay acuerdo de pago asociado a esta factura.
                                         </Typography>
-                                        <Button
-                                            variant="outlined"
-                                            color="primary"
-                                            sx={{ mt: 2 }}
-                                            onClick={() => alert("Por favor, contacte con un asesor para solicitar un acuerdo de pago.")}
-                                        >
-                                            Solicitar Acuerdo de Pago
-                                        </Button>
+
+                                        {_selectedInvoice?.collectionStatus !== "ingebrekestelling" && (
+                                            <Button
+                                                variant="outlined"
+                                                color="primary"
+                                                sx={{ mt: 2 }}
+                                                onClick={() => alert("Por favor, contacte con un asesor para solicitar un acuerdo de pago.")}
+                                            >
+                                                Solicitar Acuerdo de Pago
+                                            </Button>
+                                        )}
                                     </>
                                 )}
 

@@ -3,7 +3,8 @@ import {
   FaCashRegister,
   FaRegClock,
   FaMoneyCheckAlt,
-  FaPlusCircle,  
+  FaPlusCircle,    
+  FaHandshake,
 } from "react-icons/fa";
 
 const CobranzaMenu = (t: (key: string) => string) => {
@@ -18,21 +19,28 @@ const CobranzaMenu = (t: (key: string) => string) => {
           id: "3.1",
           label: t("Cobranzas.cobrosPendientes"),
           Icon: FaRegClock,
-          path: "/cobros-pendientes",
+          path: "/pending-collections",
           roles: [UserRoles.TENANT_ADMIN, UserRoles.COLLECTIONS_EXECUTIVE],
         },
         {
           id: "3.2",
           label: t("Cobranzas.cobrosRealizados"),
           Icon: FaMoneyCheckAlt,
-          path: "/cobros-realizados",
+          path: "/completed-collections",
           roles: [UserRoles.TENANT_ADMIN, UserRoles.COLLECTIONS_EXECUTIVE],
         },
         {
           id: "3.3",
           label: t("Cobranzas.registrarCobro"),
           Icon: FaPlusCircle,
-          path: "/registrar-cobro",
+          path: "/register-collection",
+          roles: [UserRoles.TENANT_ADMIN, UserRoles.COLLECTIONS_EXECUTIVE],
+        },
+        {
+          id: "3.4",
+          label: t("Cobranzas.contribucionesColectivas"),
+          Icon: FaHandshake,
+          path: "/collective-contributions",
           roles: [UserRoles.TENANT_ADMIN, UserRoles.COLLECTIONS_EXECUTIVE],
         },
       ],
