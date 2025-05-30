@@ -4,14 +4,32 @@ import CompanyInfoCard from "./CompanyInfoCard";
 import { useAuthContext } from "@/context";
 import TermsAndConditionsCard from "./TermsAndConditionsCard";
 import LoadingUI from "@/components/ui/LoadingUI";
+import useClientRouter from "@/hooks/useNavigations";
+
+
 
 const SignUpNew: React.FC = () => {
-  const { step } = useAuthContext();
+  const { redirectToSignUp, redirectTo } = useClientRouter();
+
+  const { step, validateToken } = useAuthContext();
   const [client, setClient] = React.useState(false);
 
   useEffect(() => {
+    const checkToken = async () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const token = urlParams.get("token");
+      if (token) {
+        const isValid = await validateToken(token);
+        if (!isValid) {
+          redirectTo("/");
+        }
+      }
+    };
     setClient(true);
+    checkToken();
   }, []);
+
+
 
   if (!client) return <LoadingUI />;
 
