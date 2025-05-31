@@ -10,6 +10,8 @@ import configuracionMenu from "@/modules/menus/Configuracion";
 import myAccounts from "@/modules/menus/MyAccounts";
 // import seguridadMenu from "@/common/data/menu-rol/Seguridad";
 import soporteMenu from "@/modules/menus/Soporte";
+import empresasMenu from "@/modules/menus/Empresas";
+
 
 interface MenuItem {
   id: string;
@@ -64,6 +66,10 @@ const useFilteredMenuByRole = (role: string) => {
 
     const filteredMyAccounts = filterMenuByRole(myAccounts(t), role);
 
+    // creado por stalyn aviles
+    const filteredEmpresaMenu = filterMenuByRole(empresasMenu(t), role);
+
+
     // Unimos todos los menús filtrados en un solo array
     return [
       ...filteredHomeMenu,
@@ -76,6 +82,7 @@ const useFilteredMenuByRole = (role: string) => {
       // ...filteredSeguridadMenu,
       // ...filteredSoporteMenu,
       ...filteredMyAccounts,
+      ...filteredEmpresaMenu
     ];
   }, [role, t]); // Dependemos del 'role' y 't' para re-calcular cuando el rol o el idioma cambien
 };

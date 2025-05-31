@@ -7,6 +7,7 @@ const allowedAuthPaths = [
   "/auth/sign_up_new",
   "/auth/login_company/get_account_url",
   "/auth/login_company/enter_slug",
+  "/auth/login_company/email_password"
 ];
 
 // SE PUEDEN ACCEDER SIN TOKEN DE ACCESO, SOLO PARA TENANT

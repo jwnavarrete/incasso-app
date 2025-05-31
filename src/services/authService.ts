@@ -4,6 +4,7 @@ import {
   iSignIn,
   iTokens,
   iValidateSlugResponse,
+  iInviteTokenResponse
 } from "@/common/types/auth/auth";
 import { ErrorHandler } from "@/lib/errors";
 
@@ -46,6 +47,15 @@ class AuthService {
 
       return response.data;
     } catch (error) {
+      throw error;
+    }
+  }
+
+  async validateToken(token: string): Promise<iInviteTokenResponse> {
+    try {
+      const response = await axios.get(`/api/proxy/company/invite/${token}`);
+      return response.data;
+    } catch (error: any) {
       throw error;
     }
   }

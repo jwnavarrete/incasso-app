@@ -2,7 +2,7 @@
     "inicio": "Inicio",
     "accounts_receivable": {
         "title": "Cuentas por cobrar",
-        "registro": "Registro",        
+        "registro": "Registro",
         "viewInvoices": "Consultar facturas"
     },
     "Clientes": {
@@ -36,5 +36,8 @@
     "Soporte": {
         "title": "Soporte",
         "technicalSupport": "Soporte técnico"
+    },
+    "Empresas": {
+        "title": "Empresas"
     }
 }

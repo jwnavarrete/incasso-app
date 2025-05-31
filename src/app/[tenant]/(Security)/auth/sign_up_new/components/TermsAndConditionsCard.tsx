@@ -36,7 +36,10 @@ const TermsAndConditionsCard = () => {
 
   const handleCreateAccount = async () => {
     try {
+      // const urlParams = new URLSearchParams(window.location.search);
+      // const token = urlParams.get("token") || null;
       const response = await signUp();
+      // const response = await signUp(token);
 
       setProxiAuthSession(response);
 

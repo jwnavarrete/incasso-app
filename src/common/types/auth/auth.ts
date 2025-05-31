@@ -30,6 +30,12 @@ export interface iValidateSlugResponse {
   isValid: boolean;
 }
 
+export interface iInviteTokenResponse {
+  invitedEmail: string;
+  invitedCompany: string;
+  country: string;
+}
+
 export interface iUserInfo extends iIdToken {
   // Puedes agregar propiedades adicionales aquí si es necesario
 }

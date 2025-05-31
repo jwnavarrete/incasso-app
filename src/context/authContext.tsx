@@ -17,6 +17,7 @@ import {
   iSignIn,
   iTokens,
   iValidateSlugResponse,
+  iInviteTokenResponse
 } from "@/common/types/auth/auth";
 import { ErrorHandler } from "@/lib/errors";
 
@@ -32,6 +33,7 @@ interface AuthContextProps {
   signUp: () => Promise<iTokens>;
   sendRecoveryUrl: (email: string) => Promise<string>;
   loading: boolean;
+  validateToken: (token: string) => Promise<Boolean>;
 }
 
 interface AuthProviderProps {
@@ -128,6 +130,22 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
+  const validateToken = async (token: string): Promise<Boolean> => {
+    const authService = new AuthService();
+    try {
+      setLoading(true);
+      const response = await authService.validateToken(token);
+      return true;
+    } catch (error: any) {
+      alert("Error validando el token: " + (error.response?.data.error));
+      return false;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
+
   const signUp = async (): Promise<iTokens> => {
     const authService = new AuthService();
     try {
@@ -151,6 +169,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       signUp,
       validateSlug,
       sendRecoveryUrl,
+      validateToken
     }),
     [step, signUpData, loading]
   );
