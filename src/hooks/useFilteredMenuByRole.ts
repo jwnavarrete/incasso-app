@@ -70,11 +70,11 @@ const useFilteredMenuByRole = (role: string) => {
       ...filteredCuentasPorCobrar,
       ...filteredCobranzaMenu,
       ...filteredClienteMenu,
-      ...filteredEstadoCuentaMenu,
+      // ...filteredEstadoCuentaMenu,
       ...filteredReporteMenu,
       ...filteredConfiguracionMenu,
       // ...filteredSeguridadMenu,
-      ...filteredSoporteMenu,
+      // ...filteredSoporteMenu,
       ...filteredMyAccounts,
     ];
   }, [role, t]); // Dependemos del 'role' y 't' para re-calcular cuando el rol o el idioma cambien

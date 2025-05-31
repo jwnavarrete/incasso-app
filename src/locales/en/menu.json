@@ -16,7 +16,7 @@
         "cobrosPendientes": "Pending collections",
         "cobrosRealizados": "Completed collections",
         "registrarCobro": "Register collection",
-        "contribucionesColectivas": "Collective contributions"
+        "contribucionesColectivas": "contributions"
     },
     "EstadoCuenta": {
         "title": "Account status",

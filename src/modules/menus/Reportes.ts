@@ -1,5 +1,5 @@
 import { UserRoles } from "@/common/enums/userRoles";
-import { FaChartBar, FaChartLine } from "react-icons/fa";
+import { FaChartBar, FaChartLine, FaWallet } from "react-icons/fa";
 
 const reporteMenu = (t: (key: string) => string) => {
   return [
@@ -15,6 +15,13 @@ const reporteMenu = (t: (key: string) => string) => {
           Icon: FaChartLine,
           path: "/reporte-cobranzas",
           roles: [UserRoles.TENANT_ADMIN],
+        },
+        {
+          id: "6.2",
+          label: 'Estado de Cuentas',
+          Icon: FaWallet,
+          path: "/estado-cuentas-cliente",
+          roles: [UserRoles.TENANT_ADMIN, UserRoles.COLLECTIONS_EXECUTIVE],
         },
       ],
     },

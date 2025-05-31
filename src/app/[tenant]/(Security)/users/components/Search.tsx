@@ -21,6 +21,7 @@ const Search: React.FC = () => {
         placeholder="Search user name / email"
         value={query.search}
         onChange={handleSearch}
+        size="small"
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">

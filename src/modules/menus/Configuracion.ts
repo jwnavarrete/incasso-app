@@ -23,13 +23,13 @@ const configuracionMenu = (t: (key: string) => string) => {
           path: "/users",
           roles: [UserRoles.TENANT_ADMIN],
         },
-        {
-          id: "7.3",
-          label: t('Configuracion.conexionApi'), // Usamos la función de traducción
-          Icon: FaPlug,
-          path: "/conexion-api",
-          roles: [UserRoles.TENANT_ADMIN],
-        },
+        // {
+        //   id: "7.3",
+        //   label: t('Configuracion.conexionApi'), // Usamos la función de traducción
+        //   Icon: FaPlug,
+        //   path: "/conexion-api",
+        //   roles: [UserRoles.TENANT_ADMIN],
+        // },
       ],
     },
   ];

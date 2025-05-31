@@ -6,6 +6,7 @@ import {
   FaPlusCircle,    
   FaHandshake,
 } from "react-icons/fa";
+import { RiShakeHandsFill } from "react-icons/ri";
 
 const CobranzaMenu = (t: (key: string) => string) => {
   return [
@@ -29,17 +30,17 @@ const CobranzaMenu = (t: (key: string) => string) => {
           path: "/completed-collections",
           roles: [UserRoles.TENANT_ADMIN, UserRoles.COLLECTIONS_EXECUTIVE],
         },
+        // {
+        //   id: "3.3",
+        //   label: t("Cobranzas.registrarCobro"),
+        //   Icon: FaPlusCircle,
+        //   path: "/register-collection",
+        //   roles: [UserRoles.TENANT_ADMIN, UserRoles.COLLECTIONS_EXECUTIVE],
+        // },
         {
           id: "3.3",
-          label: t("Cobranzas.registrarCobro"),
-          Icon: FaPlusCircle,
-          path: "/register-collection",
-          roles: [UserRoles.TENANT_ADMIN, UserRoles.COLLECTIONS_EXECUTIVE],
-        },
-        {
-          id: "3.4",
           label: t("Cobranzas.contribucionesColectivas"),
-          Icon: FaHandshake,
+          Icon: RiShakeHandsFill,
           path: "/collective-contributions",
           roles: [UserRoles.TENANT_ADMIN, UserRoles.COLLECTIONS_EXECUTIVE],
         },
